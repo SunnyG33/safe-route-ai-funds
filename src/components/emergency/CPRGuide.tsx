@@ -572,59 +572,61 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
               )}
             </div>
             
-            {/* Main Visual - Cycle Flow */}
-            <div className="relative h-80 bg-gradient-to-b from-green-100 to-green-200 p-6 pt-16">
-              <div className="relative w-full h-full">
-                {/* Two-phase demonstration */}
-                <div className="absolute inset-8 grid grid-cols-2 gap-8">
-                  {/* Compression Phase */}
-                  <div className="relative bg-red-100 border-4 border-red-500 rounded-2xl p-4 shadow-2xl">
-                    <div className="text-center mb-4">
-                      <div className="text-lg font-black text-red-600">COMPRESSIONS</div>
-                    </div>
-                    
-                    {/* Mini compression demo */}
-                    <div className="relative flex items-center justify-center h-24">
-                      <div className="w-24 h-16 bg-orange-400 rounded-lg border-2 border-orange-500 shadow-lg"></div>
-                      <div className={`absolute -top-8 w-12 h-16 bg-blue-300 rounded-lg border-2 border-blue-400 shadow-lg ${
-                        isActive ? 'animate-bounce' : ''
-                      }`}></div>
-                    </div>
-                    
-                    <div className="text-center mt-4">
-                      <div className="text-4xl font-black text-red-600">30</div>
-                      <div className="text-sm font-bold text-red-500">PUSHES</div>
-                    </div>
-                  </div>
-                  
-                  {/* Breathing Phase */}
-                  <div className="relative bg-blue-100 border-4 border-blue-500 rounded-2xl p-4 shadow-2xl">
-                    <div className="text-center mb-4">
-                      <div className="text-lg font-black text-blue-600">BREATHS</div>
-                    </div>
-                    
-                    {/* Mini breathing demo */}
-                    <div className="relative flex items-center justify-center h-24">
-                      <div className="w-20 h-12 bg-skin-tone rounded-full border-2 border-skin-tone-dark shadow-lg transform -rotate-12"></div>
-                      <div className="absolute -right-4 top-4 text-3xl animate-pulse">💨</div>
-                    </div>
-                    
-                    <div className="text-center mt-4">
-                      <div className="text-4xl font-black text-blue-600">2</div>
-                      <div className="text-sm font-bold text-blue-500">BREATHS</div>
-                    </div>
-                  </div>
+            {/* Main Visual - Real Human Demonstration */}
+            <div className="relative h-80 bg-white overflow-hidden flex pt-16">
+              {/* Navigation arrows */}
+              <button 
+                onClick={previousStep}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-green-600 text-white p-3 rounded-full shadow-2xl hover:bg-green-700 transition-colors z-20"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              
+              <button 
+                onClick={nextStep}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-green-600 text-white p-3 rounded-full shadow-2xl hover:bg-green-700 transition-colors z-20"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+              
+              {/* Compression Demonstration */}
+              <div className="w-1/2 relative border-r-2 border-green-500">
+                <img 
+                  src={cprCompressions} 
+                  alt="Person performing chest compressions" 
+                  className="w-full h-full object-contain"
+                />
+                <div className="absolute top-4 left-2 bg-red-600 text-white px-3 py-2 rounded-lg font-bold text-sm shadow-lg">
+                  COMPRESSIONS
                 </div>
-                
-                {/* Flow arrows */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl text-green-600 animate-pulse z-10">
-                  ↔️
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2 rounded-xl font-black text-lg shadow-lg">
+                  30 PUSHES
                 </div>
-                
-                {/* Critical warning */}
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-2xl font-black shadow-2xl border-4 border-red-700 animate-pulse text-center">
-                  ⚠️ DON'T STOP UNTIL EMS ARRIVES ⚠️
+              </div>
+              
+              {/* Breathing Demonstration */}
+              <div className="w-1/2 relative">
+                <img 
+                  src={cprRescueBreath} 
+                  alt="Person giving rescue breath" 
+                  className="w-full h-full object-contain"
+                />
+                <div className="absolute top-4 right-2 bg-blue-600 text-white px-3 py-2 rounded-lg font-bold text-sm shadow-lg">
+                  BREATHS
                 </div>
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-4 py-2 rounded-xl font-black text-lg shadow-lg">
+                  2 BREATHS
+                </div>
+              </div>
+              
+              {/* Flow arrows */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl text-green-600 animate-pulse z-10 bg-white rounded-full p-2 shadow-lg">
+                ↔️
+              </div>
+              
+              {/* Critical warning */}
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-2xl font-black shadow-2xl border-4 border-red-700 animate-pulse text-center">
+                ⚠️ DON'T STOP UNTIL EMS ARRIVES ⚠️
               </div>
             </div>
             
