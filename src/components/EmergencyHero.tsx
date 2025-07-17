@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 const EmergencyHero = () => {
+  // Emergency hero component with indigenous-first design
   return (
     <div className="min-h-screen bg-emergency-calm p-6">
       <div className="max-w-2xl mx-auto space-y-6">
