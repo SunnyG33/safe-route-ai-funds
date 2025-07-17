@@ -72,6 +72,10 @@ All colors MUST be HSL.
     
     --emergency-focus: 217 91% 60%;
     --emergency-focus-foreground: 0 0% 100%;
+    
+    /* Skin tone colors for visual demonstrations */
+    --skin-tone: 30 25% 75%;
+    --skin-tone-dark: 25 20% 65%;
   }
 
   .dark {
@@ -129,6 +133,10 @@ All colors MUST be HSL.
     
     --emergency-focus: 217 91% 60%;
     --emergency-focus-foreground: 0 0% 100%;
+    
+    /* Skin tone colors for visual demonstrations - dark mode */
+    --skin-tone: 25 20% 60%;
+    --skin-tone-dark: 20 15% 50%;
   }
 }
 

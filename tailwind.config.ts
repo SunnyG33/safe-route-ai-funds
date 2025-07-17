@@ -76,7 +76,9 @@ export default {
 					'calm-foreground': 'hsl(var(--emergency-calm-foreground))',
 					focus: 'hsl(var(--emergency-focus))',
 					'focus-foreground': 'hsl(var(--emergency-focus-foreground))'
-				}
+				},
+				'skin-tone': 'hsl(var(--skin-tone))',
+				'skin-tone-dark': 'hsl(var(--skin-tone-dark))'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -99,11 +101,16 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				compress: {
+					'0%, 100%': { transform: 'translateY(-8px)' },
+					'50%': { transform: 'translateY(8px)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				compress: 'compress 0.5s ease-in-out infinite'
 			}
 		}
 	},

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Mic, MicOff, Heart, Volume2 } from 'lucide-react';
+import { ArrowLeft, Mic, MicOff, Heart, Volume2, User, Hand } from 'lucide-react';
 
 interface CPRGuideProps {
   onBack: () => void;
@@ -57,20 +57,33 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
         }
       };
 
-      recognitionRef.current.onerror = () => {
-        // Restart recognition on error for continuous listening
-        setTimeout(() => {
-          if (isListening && recognitionRef.current) {
-            recognitionRef.current.start();
-          }
-        }, 1000);
+      recognitionRef.current.onerror = (event) => {
+        console.log('Speech recognition error:', event.error);
+        // Only restart if not already started
+        if (event.error !== 'aborted') {
+          setTimeout(() => {
+            if (isListening && recognitionRef.current) {
+              try {
+                recognitionRef.current.start();
+              } catch (err) {
+                console.log('Speech recognition restart failed:', err);
+              }
+            }
+          }, 1000);
+        }
       };
 
       recognitionRef.current.onend = () => {
         // Restart recognition to keep it continuous
-        if (isListening && recognitionRef.current) {
-          recognitionRef.current.start();
-        }
+        setTimeout(() => {
+          if (isListening && recognitionRef.current) {
+            try {
+              recognitionRef.current.start();
+            } catch (err) {
+              console.log('Speech recognition restart failed:', err);
+            }
+          }
+        }, 500);
       };
     }
 
@@ -86,7 +99,11 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
     requestWakeLock();
     
     if (recognitionRef.current && isListening) {
-      recognitionRef.current.start();
+      try {
+        recognitionRef.current.start();
+      } catch (err) {
+        console.log('Initial speech recognition start failed:', err);
+      }
     }
 
     return () => {
@@ -208,45 +225,200 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
     }
   };
 
+  const renderStepAnimation = (step: CPRStep) => {
+    switch (step) {
+      case 'setup':
+        return (
+          <div className="flex flex-col items-center space-y-6">
+            <div className="relative">
+              <div className="w-32 h-32 bg-blue-100 rounded-full flex items-center justify-center animate-pulse">
+                <User className="w-16 h-16 text-blue-600" />
+              </div>
+              <div className="absolute -top-2 -right-2 animate-bounce">
+                <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-xs font-bold">!</span>
+                </div>
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="animate-pulse text-2xl font-bold text-emergency-700 mb-2">
+                "ARE YOU OKAY?"
+              </div>
+              <div className="flex space-x-4 animate-bounce">
+                <Hand className="w-8 h-8 text-emergency-600" />
+                <span className="text-lg">Tap shoulders firmly</span>
+              </div>
+            </div>
+          </div>
+        );
+      
+      case 'positioning':
+        return (
+          <div className="flex flex-col items-center space-y-6">
+            <div className="relative">
+              <div className="w-40 h-24 bg-blue-100 rounded-lg flex items-center justify-center">
+                <div className="text-blue-600 text-sm">Chest</div>
+              </div>
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2">
+                <div className="w-16 h-20 bg-skin-tone rounded-lg animate-pulse shadow-lg">
+                  <div className="w-full h-8 bg-skin-tone-dark rounded-lg mt-2"></div>
+                </div>
+              </div>
+              <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
+                <div className="w-12 h-16 bg-skin-tone-dark rounded-lg animate-pulse opacity-80">
+                  <div className="w-full h-6 bg-skin-tone rounded-lg mt-2"></div>
+                </div>
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-lg font-semibold text-emergency-700">
+                Heel of hand on center of chest
+              </div>
+              <div className="text-sm text-emergency-600">
+                Between nipples, hands interlaced
+              </div>
+            </div>
+          </div>
+        );
+      
+      case 'compressions':
+        return (
+          <div className="flex flex-col items-center space-y-6">
+            <div className="relative">
+              <div className="w-40 h-24 bg-blue-100 rounded-lg flex items-center justify-center">
+                <div className="text-blue-600 text-sm">Chest</div>
+              </div>
+              <div className={`absolute top-0 left-1/2 transform -translate-x-1/2 transition-transform duration-300 ${
+                isActive ? 'animate-[compress_0.5s_ease-in-out_infinite]' : '-translate-y-2'
+              }`}>
+                <div className="w-16 h-20 bg-skin-tone rounded-lg shadow-lg">
+                  <div className="w-full h-8 bg-skin-tone-dark rounded-lg mt-2"></div>
+                </div>
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-emergency-700 animate-pulse">
+                PUSH HARD & FAST
+              </div>
+              <div className="text-lg text-emergency-600">
+                At least 2 inches deep • 100-120/min
+              </div>
+              {isActive && (
+                <div className="text-4xl font-bold text-emergency-800 animate-pulse">
+                  {compressionCount}
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      
+      case 'breathing':
+        return (
+          <div className="flex flex-col items-center space-y-6">
+            <div className="relative">
+              <div className="w-32 h-20 bg-blue-100 rounded-full flex items-center justify-center">
+                <div className="text-blue-600 text-sm">Head</div>
+              </div>
+              <div className="absolute top-2 right-4">
+                <div className="w-8 h-6 bg-skin-tone rounded-full"></div>
+              </div>
+              <div className="absolute bottom-0 right-8 animate-pulse">
+                <div className="text-2xl">💨</div>
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-lg font-semibold text-emergency-700 mb-2">
+                Tilt head back, lift chin
+              </div>
+              <div className="flex items-center justify-center space-x-2">
+                <div className="w-8 h-6 bg-skin-tone rounded animate-pulse"></div>
+                <span className="text-emergency-600">→</span>
+                <div className="text-2xl animate-bounce">💨</div>
+                <span className="text-lg font-semibold">x2</span>
+              </div>
+              <div className="text-sm text-emergency-600 mt-2">
+                Pinch nose • Seal mouth • 1 second each
+              </div>
+            </div>
+          </div>
+        );
+      
+      case 'cycles':
+        return (
+          <div className="flex flex-col items-center space-y-6">
+            <div className="grid grid-cols-2 gap-8">
+              <div className="text-center">
+                <div className="w-20 h-16 bg-red-100 rounded-lg flex items-center justify-center animate-pulse">
+                  <Heart className="w-8 h-8 text-red-600" />
+                </div>
+                <div className="text-lg font-bold text-emergency-700 mt-2">30</div>
+                <div className="text-sm text-emergency-600">Compressions</div>
+              </div>
+              <div className="text-center">
+                <div className="w-20 h-16 bg-blue-100 rounded-lg flex items-center justify-center animate-pulse">
+                  <div className="text-2xl">💨</div>
+                </div>
+                <div className="text-lg font-bold text-emergency-700 mt-2">2</div>
+                <div className="text-sm text-emergency-600">Breaths</div>
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-xl font-bold text-emergency-700 animate-pulse">
+                REPEAT CYCLES
+              </div>
+              <div className="text-lg text-emergency-600">
+                Don't stop until help arrives
+              </div>
+              {isActive && (
+                <div className="mt-4">
+                  <Badge variant="secondary" className="text-lg px-4 py-2">
+                    Cycle {cycleCount + 1}
+                  </Badge>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      
+      default:
+        return null;
+    }
+  };
+
   const getStepInstructions = (step: CPRStep) => {
     switch (step) {
       case 'setup':
         return {
           title: "1. Check Responsiveness",
-          visual: "👤 Tap shoulders firmly and shout 'Are you okay?'",
           instruction: "• Tap the person's shoulders firmly\n• Shout 'Are you okay?'\n• Check for normal breathing\n• Call 911 or have someone else call",
           audio: "Tap the person's shoulders firmly and shout 'Are you okay?'. Check for normal breathing. Call 911 immediately."
         };
       case 'positioning':
         return {
           title: "2. Position Hands",
-          visual: "✋ Place heel of hand on center of chest between nipples",
           instruction: "• Place heel of one hand on center of chest\n• Between the nipples on breastbone\n• Place other hand on top, interlacing fingers\n• Keep arms straight, shoulders over hands",
           audio: "Place the heel of one hand on the center of the chest between the nipples. Place your other hand on top and interlace your fingers. Keep your arms straight."
         };
       case 'compressions':
         return {
           title: "3. Chest Compressions",
-          visual: "💓 Push hard and fast at least 2 inches deep",
           instruction: "• Push hard and fast at least 2 inches deep\n• Allow complete chest recoil\n• Minimize interruptions\n• Count out loud: 1, 2, 3...",
           audio: "Push hard and fast at least 2 inches deep. Allow the chest to come back up completely between compressions."
         };
       case 'breathing':
         return {
           title: "4. Rescue Breaths",
-          visual: "💨 Tilt head back, lift chin, give 2 breaths",
           instruction: "• Tilt head back, lift chin\n• Pinch nose closed\n• Make seal over mouth\n• Give 2 breaths, 1 second each",
           audio: "Tilt the head back and lift the chin. Pinch the nose closed and give 2 rescue breaths, one second each."
         };
       case 'cycles':
         return {
           title: "5. Continue Cycles",
-          visual: "🔄 30 compressions, then 2 breaths",
           instruction: "• Continue 30 compressions, 2 breaths\n• Don't stop until help arrives\n• Switch with someone every 2 minutes if possible",
           audio: "Continue cycles of 30 compressions followed by 2 rescue breaths. Don't stop until emergency help arrives."
         };
       default:
-        return { title: "", visual: "", instruction: "", audio: "" };
+        return { title: "", instruction: "", audio: "" };
     }
   };
 
@@ -308,10 +480,12 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
       {/* Main Instructions */}
       <Card className="flex-1 p-8 mb-6">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-emergency-800 mb-4">
+          <h2 className="text-3xl font-bold text-emergency-800 mb-6">
             {currentInstructions.title}
           </h2>
-          <div className="text-6xl mb-6">{currentInstructions.visual}</div>
+          <div className="mb-6">
+            {renderStepAnimation(currentStep)}
+          </div>
         </div>
 
         <div className="space-y-6">
