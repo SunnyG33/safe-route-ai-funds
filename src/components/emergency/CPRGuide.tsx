@@ -607,11 +607,11 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
               
                {/* Breathing Demonstration */}
                <div className="w-1/2 relative">
-                 <img 
-                   src={cprRescueBreathSimple} 
-                   alt="Simple rescue breathing diagram" 
-                   className="w-full h-full object-contain"
-                 />
+                  <img 
+                    src={cprRescueBreathSimple} 
+                    alt="Simple rescue breathing diagram - less graphic" 
+                    className="w-full h-full object-contain"
+                  />
                  <div className="absolute top-4 right-2 bg-blue-600 text-white px-3 py-2 rounded-lg font-bold text-sm shadow-lg">
                    BREATHS
                  </div>
