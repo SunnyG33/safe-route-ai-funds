@@ -10,7 +10,7 @@ import cprHandPosition from '@/assets/cpr-hand-position-hq.png';
 import cprCompressions from '@/assets/cpr-compressions-hq.png';
 import cprAirway from '@/assets/cpr-airway-hq.png';
 import cprRescueBreath from '@/assets/cpr-rescue-breath-hq.png';
-import cprRescueBreathSimple from '@/assets/cpr-rescue-breath-simple.png';
+import cprRescueBreathSimple from '../assets/cpr-rescue-breath-simple.png';
 
 interface CPRGuideProps {
   onBack: () => void;
