@@ -269,6 +269,14 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
                 className="w-full h-full object-contain"
               />
               
+              {/* Navigation arrows directly on image */}
+              <button 
+                onClick={nextStep}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-red-600 text-white p-4 rounded-full shadow-2xl hover:bg-red-700 transition-colors z-10"
+              >
+                <ChevronRight className="w-8 h-8" />
+              </button>
+              
               {/* Overlay with critical instructions */}
               <div className="absolute top-4 left-4 bg-red-600 text-white px-4 py-2 rounded-lg font-bold shadow-lg animate-pulse">
                 📱 CALL 911 FIRST
@@ -322,6 +330,21 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
                 alt="Proper hand positioning for CPR compressions" 
                 className="w-full h-full object-contain"
               />
+              
+              {/* Navigation arrows */}
+              <button 
+                onClick={previousStep}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white p-4 rounded-full shadow-2xl hover:bg-blue-700 transition-colors z-10"
+              >
+                <ChevronLeft className="w-8 h-8" />
+              </button>
+              
+              <button 
+                onClick={nextStep}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white p-4 rounded-full shadow-2xl hover:bg-blue-700 transition-colors z-10"
+              >
+                <ChevronRight className="w-8 h-8" />
+              </button>
               
               {/* Overlay instructions */}
               <div className="absolute top-4 left-4 bg-blue-600 text-white px-4 py-2 rounded-lg font-bold shadow-lg">
@@ -385,8 +408,23 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
                 className="w-full h-full object-contain"
               />
               
+              {/* Navigation arrows */}
+              <button 
+                onClick={previousStep}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-red-600 text-white p-3 rounded-full shadow-2xl hover:bg-red-700 transition-colors z-10"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              
+              <button 
+                onClick={nextStep}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-red-600 text-white p-3 rounded-full shadow-2xl hover:bg-red-700 transition-colors z-10"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+              
               {/* Metronome Visual (animated pulsing circle) */}
-              <div className="absolute top-8 right-4">
+              <div className="absolute top-8 right-16">
                 <div className={`w-16 h-16 rounded-full border-4 shadow-lg flex items-center justify-center ${
                   isActive ? 'bg-green-500 border-green-600 animate-[pulse_0.5s_ease-in-out_infinite]' : 'bg-gray-400 border-gray-500'
                 }`}>
@@ -395,7 +433,7 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
               </div>
               
               {/* Critical overlays */}
-              <div className="absolute top-8 left-4 bg-red-600 text-white px-4 py-2 rounded-lg font-bold shadow-lg animate-pulse">
+              <div className="absolute top-8 left-16 bg-red-600 text-white px-4 py-2 rounded-lg font-bold shadow-lg animate-pulse">
                 💥 PUSH HARD
               </div>
               
@@ -403,7 +441,7 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
                 📏 2 INCHES DEEP
               </div>
               
-              <div className="absolute bottom-8 right-4 bg-blue-600 text-white px-4 py-2 rounded-lg font-bold shadow-lg">
+              <div className="absolute bottom-8 right-16 bg-blue-600 text-white px-4 py-2 rounded-lg font-bold shadow-lg">
                 ↩️ FULL RECOIL
               </div>
             </div>
@@ -437,6 +475,21 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
             
             {/* Dual Image Display for Breathing Steps */}
             <div className="relative h-80 bg-white overflow-hidden flex">
+              {/* Navigation arrows for breathing step */}
+              <button 
+                onClick={previousStep}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white p-3 rounded-full shadow-2xl hover:bg-blue-700 transition-colors z-20"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              
+              <button 
+                onClick={nextStep}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white p-3 rounded-full shadow-2xl hover:bg-blue-700 transition-colors z-20"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+              
               {/* Airway Management */}
               <div className="w-1/2 relative">
                 <img 
