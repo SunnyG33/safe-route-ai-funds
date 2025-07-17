@@ -1,88 +1,109 @@
-import { AlertTriangle, Phone, MapPin, Users, Wifi } from "lucide-react";
+import { Shield, Phone, CheckCircle, Users, AlertTriangle, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 const EmergencyHero = () => {
-  const emergencyTypes = [
-    { name: "Wildfire", status: "active", count: 3 },
-    { name: "Flood", status: "watch", count: 1 },
-    { name: "Severe Weather", status: "warning", count: 2 },
-  ];
-
-  const quickActions = [
-    { icon: Phone, label: "Emergency Call", action: "911" },
-    { icon: MapPin, label: "Safe Route", action: "route" },
-    { icon: Users, label: "Community Hub", action: "community" },
-    { icon: Wifi, label: "Offline Mode", action: "offline" },
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-50 p-4">
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-red-700 mb-2">SafeRoute AI</h1>
-          <p className="text-lg text-red-600">Emergency Guidance & Community Safety</p>
+    <div className="min-h-screen bg-emergency-calm p-6">
+      <div className="max-w-2xl mx-auto space-y-6">
+        {/* Calming Header */}
+        <div className="text-center space-y-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-emergency-safe rounded-full mb-4">
+            <Shield className="h-8 w-8 text-emergency-safe-foreground" />
+          </div>
+          <h1 className="text-3xl font-bold text-emergency-calm-foreground">SafeRoute AI</h1>
+          <p className="text-lg text-emergency-calm-foreground/80">You're going to be okay. Let's take this step by step.</p>
         </div>
 
-        {/* Emergency Status Bar */}
-        <Card className="mb-6 border-red-200 bg-red-50">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <AlertTriangle className="h-5 w-5 text-red-600" />
-              <span className="font-semibold text-red-700">Active Alerts in Your Area</span>
+        {/* Step 1: Check In Safe */}
+        <Card className="border-emergency-safe bg-emergency-safe-light">
+          <CardContent className="p-6 text-center space-y-4">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-emergency-safe rounded-full">
+              <CheckCircle className="h-6 w-6 text-emergency-safe-foreground" />
             </div>
-            <div className="flex flex-wrap gap-2">
-              {emergencyTypes.map((emergency) => (
-                <Badge 
-                  key={emergency.name}
-                  variant={emergency.status === "active" ? "destructive" : "secondary"}
-                  className="text-xs"
-                >
-                  {emergency.name} ({emergency.count})
-                </Badge>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Quick Actions Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          {quickActions.map((action) => (
-            <Card key={action.label} className="hover:shadow-lg transition-shadow cursor-pointer">
-              <CardContent className="p-6 text-center">
-                <action.icon className="h-8 w-8 mx-auto mb-3 text-red-600" />
-                <p className="font-medium text-sm">{action.label}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {/* Hero Mode Toggle */}
-        <Card className="mb-6 border-orange-200 bg-orange-50">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-lg font-semibold text-orange-700 mb-2">Hero Mode</h3>
-                <p className="text-orange-600 text-sm">
-                  Help others in your community during emergencies
-                </p>
-              </div>
-              <Button variant="outline" className="border-orange-300 text-orange-700 hover:bg-orange-100">
-                Activate Hero Mode
+            <h2 className="text-xl font-semibold text-emergency-safe">Step 1: Are You Safe Right Now?</h2>
+            <p className="text-emergency-safe/80">Let us know if you're in a safe location</p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button 
+                size="lg" 
+                className="bg-emergency-safe text-emergency-safe-foreground hover:bg-emergency-safe/90 text-lg py-6 px-8"
+              >
+                Yes, I'm Safe
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-emergency-danger text-emergency-danger hover:bg-emergency-danger hover:text-emergency-danger-foreground text-lg py-6 px-8"
+              >
+                I Need Help Now
               </Button>
             </div>
           </CardContent>
         </Card>
 
-        {/* Current Location Status */}
-        <Card className="border-green-200 bg-green-50">
+        {/* Emergency Actions - Only if help needed */}
+        <Card className="border-emergency-danger bg-emergency-danger-light">
+          <CardContent className="p-6 space-y-4">
+            <div className="flex items-center gap-3 mb-4">
+              <AlertTriangle className="h-6 w-6 text-emergency-danger" />
+              <h3 className="text-lg font-semibold text-emergency-danger">Emergency Actions</h3>
+            </div>
+            <div className="grid gap-3">
+              <Button 
+                size="lg" 
+                className="bg-emergency-danger text-emergency-danger-foreground hover:bg-emergency-danger/90 justify-start h-16"
+              >
+                <Phone className="h-6 w-6 mr-3" />
+                <div className="text-left">
+                  <div className="font-semibold">Call 911</div>
+                  <div className="text-sm opacity-90">Emergency services</div>
+                </div>
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="border-emergency-warning text-emergency-warning hover:bg-emergency-warning hover:text-emergency-warning-foreground justify-start h-16"
+              >
+                <MapPin className="h-6 w-6 mr-3" />
+                <div className="text-left">
+                  <div className="font-semibold">Find Safe Route</div>
+                  <div className="text-sm opacity-90">Get directions to safety</div>
+                </div>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Community Support */}
+        <Card className="border-emergency-focus bg-emergency-calm">
+          <CardContent className="p-6 space-y-4">
+            <div className="flex items-center gap-3 mb-4">
+              <Users className="h-6 w-6 text-emergency-focus" />
+              <h3 className="text-lg font-semibold text-emergency-calm-foreground">Community Support</h3>
+            </div>
+            <p className="text-emergency-calm-foreground/80">Connect with local heroes and community members</p>
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="w-full border-emergency-focus text-emergency-focus hover:bg-emergency-focus hover:text-emergency-focus-foreground h-14"
+            >
+              Join Community Hub
+            </Button>
+          </CardContent>
+        </Card>
+
+        {/* Current Status */}
+        <Card className="bg-card border-border">
           <CardContent className="p-4">
-            <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-green-600" />
-              <span className="text-green-700 font-medium">Location: Vancouver, BC</span>
-              <Badge variant="outline" className="border-green-300 text-green-700">Connected</Badge>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-muted-foreground" />
+                <span className="text-sm text-muted-foreground">Vancouver, BC</span>
+              </div>
+              <Badge variant="outline" className="border-emergency-safe text-emergency-safe">
+                Connected
+              </Badge>
             </div>
           </CardContent>
         </Card>

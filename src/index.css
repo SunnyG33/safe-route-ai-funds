@@ -53,6 +53,25 @@ All colors MUST be HSL.
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Emergency-specific calming colors */
+    --emergency-safe: 142 76% 36%;
+    --emergency-safe-foreground: 0 0% 100%;
+    --emergency-safe-light: 142 76% 96%;
+    
+    --emergency-warning: 38 92% 50%;
+    --emergency-warning-foreground: 0 0% 100%;
+    --emergency-warning-light: 38 92% 96%;
+    
+    --emergency-danger: 0 84.2% 60.2%;
+    --emergency-danger-foreground: 0 0% 100%;
+    --emergency-danger-light: 0 84.2% 96%;
+    
+    --emergency-calm: 200 100% 97%;
+    --emergency-calm-foreground: 200 100% 20%;
+    
+    --emergency-focus: 217 91% 60%;
+    --emergency-focus-foreground: 0 0% 100%;
   }
 
   .dark {
@@ -91,6 +110,25 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Emergency-specific calming colors for dark mode */
+    --emergency-safe: 142 69% 58%;
+    --emergency-safe-foreground: 142 84% 10%;
+    --emergency-safe-light: 142 69% 15%;
+    
+    --emergency-warning: 38 100% 70%;
+    --emergency-warning-foreground: 38 100% 10%;
+    --emergency-warning-light: 38 100% 15%;
+    
+    --emergency-danger: 0 62.8% 50%;
+    --emergency-danger-foreground: 0 84.2% 10%;
+    --emergency-danger-light: 0 62.8% 15%;
+    
+    --emergency-calm: 200 50% 10%;
+    --emergency-calm-foreground: 200 50% 90%;
+    
+    --emergency-focus: 217 91% 60%;
+    --emergency-focus-foreground: 0 0% 100%;
   }
 }
 

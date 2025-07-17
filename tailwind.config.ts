@@ -61,6 +61,21 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				emergency: {
+					safe: 'hsl(var(--emergency-safe))',
+					'safe-foreground': 'hsl(var(--emergency-safe-foreground))',
+					'safe-light': 'hsl(var(--emergency-safe-light))',
+					warning: 'hsl(var(--emergency-warning))',
+					'warning-foreground': 'hsl(var(--emergency-warning-foreground))',
+					'warning-light': 'hsl(var(--emergency-warning-light))',
+					danger: 'hsl(var(--emergency-danger))',
+					'danger-foreground': 'hsl(var(--emergency-danger-foreground))',
+					'danger-light': 'hsl(var(--emergency-danger-light))',
+					calm: 'hsl(var(--emergency-calm))',
+					'calm-foreground': 'hsl(var(--emergency-calm-foreground))',
+					focus: 'hsl(var(--emergency-focus))',
+					'focus-foreground': 'hsl(var(--emergency-focus-foreground))'
 				}
 			},
 			borderRadius: {
