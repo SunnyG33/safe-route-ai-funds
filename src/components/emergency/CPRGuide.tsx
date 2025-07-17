@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Mic, MicOff, Heart, Volume2, User, Hand } from 'lucide-react';
+import { ArrowLeft, Mic, MicOff, Heart, Volume2, User, Hand, Smartphone, Eye, Stethoscope, Activity, Zap, Timer, ArrowRight, Phone, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface CPRGuideProps {
   onBack: () => void;
@@ -229,345 +229,519 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
     switch (step) {
       case 'setup':
         return (
-          <div className="flex flex-col items-center space-y-4 bg-white p-6 rounded-lg shadow-lg">
-            <div className="relative w-96 h-64 bg-gradient-to-b from-gray-100 to-gray-200 rounded-lg overflow-hidden border-2 border-gray-300">
-              {/* Close-up view of person lying down */}
-              <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-                {/* Person's torso and head */}
-                <div className="relative">
-                  {/* Head */}
-                  <div className="w-20 h-20 bg-skin-tone rounded-full absolute -top-8 left-1/2 transform -translate-x-1/2 border-2 border-skin-tone-dark">
-                    {/* Face features */}
-                    <div className="absolute top-4 left-3 w-2 h-2 bg-gray-700 rounded-full"></div> {/* Eye */}
-                    <div className="absolute top-4 right-3 w-2 h-2 bg-gray-700 rounded-full"></div> {/* Eye */}
-                    <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 w-4 h-2 bg-red-300 rounded-full"></div> {/* Mouth */}
-                  </div>
-                  
-                  {/* Shoulders and chest */}
-                  <div className="w-32 h-20 bg-orange-400 rounded-lg relative border-2 border-orange-500">
-                    <div className="absolute top-1 left-1/2 transform -translate-x-1/2 text-xs font-bold text-white">VICTIM</div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Rescuer figure on phone */}
-              <div className="absolute top-4 right-4">
-                <div className="relative">
-                  {/* Rescuer head */}
-                  <div className="w-12 h-12 bg-blue-300 rounded-full border border-blue-400">
-                    <div className="absolute top-2 left-2 w-1.5 h-1.5 bg-gray-700 rounded-full"></div>
-                    <div className="absolute top-2 right-2 w-1.5 h-1.5 bg-gray-700 rounded-full"></div>
-                  </div>
-                  {/* Phone */}
-                  <div className="absolute -right-2 top-1 w-6 h-8 bg-black rounded animate-pulse">
-                    <div className="w-full h-2 bg-green-400 rounded-t"></div>
-                  </div>
-                  {/* Body */}
-                  <div className="w-16 h-12 bg-blue-600 rounded-lg mt-1"></div>
-                </div>
-              </div>
-              
-              {/* Animated tapping hands */}
-              <div className="absolute top-16 left-20 animate-bounce">
-                <div className="w-8 h-10 bg-blue-300 rounded-lg transform rotate-12">
-                  <div className="w-full h-4 bg-blue-400 rounded-lg mt-1"></div>
-                </div>
-              </div>
-              
-              {/* "ARE YOU OK?" speech bubble */}
-              <div className="absolute top-8 left-8 bg-white border-2 border-red-500 rounded-lg p-2 animate-pulse">
-                <div className="text-sm font-bold text-red-600">"ARE YOU OK?"</div>
-                <div className="absolute bottom-0 left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white"></div>
-              </div>
-              
-              {/* Emergency number */}
-              <div className="absolute bottom-4 right-4 bg-red-600 text-white px-3 py-2 rounded-lg font-bold animate-pulse">
-                📱 911
+          <div className="relative w-full max-w-2xl mx-auto bg-white rounded-xl shadow-2xl border-4 border-red-500 overflow-hidden">
+            {/* Header Banner */}
+            <div className="bg-red-600 text-white py-3 px-6 text-center">
+              <div className="flex items-center justify-center gap-2">
+                <Phone className="w-8 h-8" />
+                <span className="text-2xl font-black">STEP 1: CALL 911</span>
+                <Phone className="w-8 h-8" />
               </div>
             </div>
             
-            <div className="text-center space-y-1">
-              <div className="text-xl font-bold text-red-600">1. CALL 911</div>
-              <div className="text-sm text-gray-600">Check response • Call for help</div>
+            {/* Main Visual */}
+            <div className="relative h-80 bg-gradient-to-b from-blue-100 to-blue-200 p-6">
+              {/* Scene Layout */}
+              <div className="relative w-full h-full">
+                {/* Person on ground - large and detailed */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                  <div className="relative">
+                    {/* Body */}
+                    <div className="w-48 h-20 bg-orange-400 rounded-lg border-4 border-orange-600 relative shadow-lg">
+                      <div className="absolute inset-2 bg-orange-300 rounded"></div>
+                      <div className="absolute top-2 left-1/2 transform -translate-x-1/2 text-white font-bold text-sm">VICTIM</div>
+                    </div>
+                    
+                    {/* Head */}
+                    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-24 h-24 bg-skin-tone rounded-full border-4 border-skin-tone-dark shadow-lg">
+                      {/* Eyes closed */}
+                      <div className="absolute top-5 left-4 w-3 h-1 bg-gray-800 rounded-full"></div>
+                      <div className="absolute top-5 right-4 w-3 h-1 bg-gray-800 rounded-full"></div>
+                      {/* Mouth */}
+                      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-4 h-2 bg-red-300 rounded-full"></div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Rescuer checking responsiveness */}
+                <div className="absolute top-8 left-8">
+                  <div className="relative">
+                    {/* Rescuer figure */}
+                    <div className="w-20 h-20 bg-blue-300 rounded-full border-4 border-blue-500 shadow-lg">
+                      <div className="absolute top-3 left-3 w-2 h-2 bg-gray-800 rounded-full"></div>
+                      <div className="absolute top-3 right-3 w-2 h-2 bg-gray-800 rounded-full"></div>
+                      <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 w-6 h-3 bg-red-400 rounded-full"></div>
+                    </div>
+                    <div className="w-24 h-16 bg-blue-600 rounded-lg mt-2 border-2 border-blue-700 shadow-lg"></div>
+                    
+                    {/* Tapping motion */}
+                    <div className="absolute -right-4 top-8 animate-bounce">
+                      <div className="w-10 h-12 bg-blue-300 rounded-lg border-2 border-blue-400 transform rotate-45"></div>
+                      <div className="absolute -bottom-2 -right-2 text-2xl animate-pulse">👋</div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Speech bubble */}
+                <div className="absolute top-2 left-32 bg-white border-4 border-red-500 rounded-xl p-3 shadow-lg animate-pulse">
+                  <div className="text-lg font-black text-red-600">"HEY! ARE YOU OK?"</div>
+                  <div className="absolute bottom-0 left-8 w-0 h-0 border-l-4 border-r-4 border-t-8 border-transparent border-t-white transform translate-y-full"></div>
+                </div>
+                
+                {/* Phone call visualization */}
+                <div className="absolute top-8 right-8">
+                  <div className="relative">
+                    <div className="w-16 h-16 bg-green-500 rounded-full border-4 border-green-600 animate-pulse shadow-lg flex items-center justify-center">
+                      <Phone className="w-8 h-8 text-white" />
+                    </div>
+                    <div className="absolute -bottom-2 -left-2 bg-red-600 text-white px-2 py-1 rounded font-bold text-sm animate-pulse">
+                      911
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Check breathing indicator */}
+                <div className="absolute bottom-16 right-12">
+                  <div className="bg-yellow-400 border-2 border-yellow-600 rounded-lg p-2 animate-pulse">
+                    <Eye className="w-6 h-6 text-yellow-800" />
+                    <div className="text-xs font-bold text-yellow-800">CHECK BREATHING</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Action Steps */}
+            <div className="bg-red-50 p-4 border-t-4 border-red-500">
+              <div className="grid grid-cols-4 gap-2 text-center">
+                <div className="bg-white rounded-lg p-2 border-2 border-red-300">
+                  <div className="text-2xl">👋</div>
+                  <div className="text-xs font-bold text-red-600">TAP SHOULDERS</div>
+                </div>
+                <div className="bg-white rounded-lg p-2 border-2 border-red-300">
+                  <div className="text-2xl">📢</div>
+                  <div className="text-xs font-bold text-red-600">SHOUT LOUDLY</div>
+                </div>
+                <div className="bg-white rounded-lg p-2 border-2 border-red-300">
+                  <div className="text-2xl">👁️</div>
+                  <div className="text-xs font-bold text-red-600">CHECK BREATHING</div>
+                </div>
+                <div className="bg-white rounded-lg p-2 border-2 border-red-300">
+                  <div className="text-2xl">📱</div>
+                  <div className="text-xs font-bold text-red-600">CALL 911</div>
+                </div>
+              </div>
             </div>
           </div>
         );
       
       case 'positioning':
         return (
-          <div className="flex flex-col items-center space-y-4 bg-white p-6 rounded-lg shadow-lg">
-            <div className="relative w-96 h-64 bg-gradient-to-b from-gray-100 to-gray-200 rounded-lg overflow-hidden border-2 border-gray-300">
-              {/* Extreme close-up of chest and hands */}
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-                {/* Victim's chest - much larger and detailed */}
-                <div className="w-56 h-32 bg-orange-400 rounded-lg relative border-2 border-orange-500">
-                  {/* Chest anatomy markers */}
-                  <div className="absolute top-4 left-12 w-3 h-3 bg-orange-600 rounded-full"></div> {/* Left nipple */}
-                  <div className="absolute top-4 right-12 w-3 h-3 bg-orange-600 rounded-full"></div> {/* Right nipple */}
-                  
-                  {/* Sternum guideline */}
-                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-full bg-red-400 opacity-70"></div>
-                  
-                  {/* Compression target area */}
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 border-4 border-red-500 rounded-full animate-pulse bg-red-100 opacity-80">
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xs font-bold text-red-700">TARGET</div>
-                  </div>
-                </div>
-                
-                {/* Detailed hand positioning */}
-                <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
-                  {/* Bottom hand (on chest) */}
-                  <div className="w-20 h-24 bg-blue-300 rounded-lg relative border-2 border-blue-400 animate-pulse">
-                    <div className="w-full h-8 bg-blue-400 rounded-lg mt-2"></div>
-                    {/* Fingers */}
-                    <div className="absolute bottom-0 left-0 w-3 h-6 bg-blue-400 rounded"></div>
-                    <div className="absolute bottom-0 left-4 w-3 h-6 bg-blue-400 rounded"></div>
-                    <div className="absolute bottom-0 right-4 w-3 h-6 bg-blue-400 rounded"></div>
-                    <div className="absolute bottom-0 right-0 w-3 h-6 bg-blue-400 rounded"></div>
-                  </div>
-                  
-                  {/* Top hand (interlaced) */}
-                  <div className="absolute top-4 left-2 w-16 h-20 bg-blue-200 rounded-lg border-2 border-blue-300 opacity-90">
-                    <div className="w-full h-6 bg-blue-300 rounded-lg mt-1"></div>
-                    {/* Interlaced fingers */}
-                    <div className="absolute bottom-0 left-1 w-2 h-4 bg-blue-300 rounded"></div>
-                    <div className="absolute bottom-0 left-4 w-2 h-4 bg-blue-300 rounded"></div>
-                    <div className="absolute bottom-0 right-4 w-2 h-4 bg-blue-300 rounded"></div>
-                    <div className="absolute bottom-0 right-1 w-2 h-4 bg-blue-300 rounded"></div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Position indicators */}
-              <div className="absolute top-4 left-4 bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold">
-                HEEL OF HAND
-              </div>
-              <div className="absolute top-4 right-4 bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold">
-                CENTER CHEST
-              </div>
-              <div className="absolute bottom-16 left-4 bg-red-600 text-white px-2 py-1 rounded text-xs font-bold">
-                BETWEEN NIPPLES
+          <div className="relative w-full max-w-2xl mx-auto bg-white rounded-xl shadow-2xl border-4 border-blue-500 overflow-hidden">
+            {/* Header Banner */}
+            <div className="bg-blue-600 text-white py-3 px-6 text-center">
+              <div className="flex items-center justify-center gap-2">
+                <Hand className="w-8 h-8" />
+                <span className="text-2xl font-black">STEP 2: HAND POSITION</span>
+                <Hand className="w-8 h-8" />
               </div>
             </div>
             
-            <div className="text-center space-y-1">
-              <div className="text-xl font-bold text-blue-600">2. HAND POSITION</div>
-              <div className="text-sm text-gray-600">Heel on center • Fingers interlaced</div>
+            {/* Main Visual - Ultra close-up of chest and hands */}
+            <div className="relative h-80 bg-gradient-to-b from-orange-100 to-orange-200 p-6">
+              <div className="relative w-full h-full flex items-center justify-center">
+                {/* Victim's chest - HUGE and detailed */}
+                <div className="relative">
+                  <div className="w-80 h-40 bg-orange-400 rounded-2xl border-4 border-orange-600 shadow-2xl relative">
+                    {/* Anatomical markers */}
+                    <div className="absolute top-6 left-16 w-4 h-4 bg-orange-700 rounded-full shadow-inner"></div>
+                    <div className="absolute top-6 right-16 w-4 h-4 bg-orange-700 rounded-full shadow-inner"></div>
+                    
+                    {/* Center line guide */}
+                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-2 h-full bg-red-500 opacity-60 rounded-full"></div>
+                    
+                    {/* Compression target zone */}
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border-8 border-red-500 rounded-full bg-red-100 opacity-80 animate-pulse flex items-center justify-center">
+                      <div className="text-red-700 font-black text-sm">TARGET</div>
+                    </div>
+                    
+                    {/* Ribs visualization */}
+                    <div className="absolute inset-4 opacity-30">
+                      <div className="w-full h-1 bg-orange-800 rounded mb-2"></div>
+                      <div className="w-full h-1 bg-orange-800 rounded mb-2"></div>
+                      <div className="w-full h-1 bg-orange-800 rounded mb-2"></div>
+                      <div className="w-full h-1 bg-orange-800 rounded"></div>
+                    </div>
+                  </div>
+                  
+                  {/* Hands positioning - DETAILED */}
+                  <div className="absolute -top-24 left-1/2 transform -translate-x-1/2">
+                    {/* Bottom hand */}
+                    <div className="relative w-32 h-40 bg-blue-300 rounded-2xl border-4 border-blue-500 shadow-2xl animate-pulse">
+                      <div className="absolute top-4 left-4 right-4 h-12 bg-blue-400 rounded-xl shadow-inner"></div>
+                      {/* Heel of hand indicator */}
+                      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
+                        HEEL
+                      </div>
+                      {/* Fingers */}
+                      <div className="absolute bottom-0 left-2 w-4 h-8 bg-blue-400 rounded-lg"></div>
+                      <div className="absolute bottom-0 left-8 w-4 h-8 bg-blue-400 rounded-lg"></div>
+                      <div className="absolute bottom-0 right-8 w-4 h-8 bg-blue-400 rounded-lg"></div>
+                      <div className="absolute bottom-0 right-2 w-4 h-8 bg-blue-400 rounded-lg"></div>
+                    </div>
+                    
+                    {/* Top hand - interlaced */}
+                    <div className="absolute top-8 left-4 w-24 h-32 bg-blue-200 rounded-xl border-4 border-blue-400 shadow-xl opacity-90">
+                      <div className="absolute top-2 left-2 right-2 h-8 bg-blue-300 rounded-lg shadow-inner"></div>
+                      {/* Interlaced fingers pattern */}
+                      <div className="absolute bottom-0 left-1 w-3 h-6 bg-blue-300 rounded"></div>
+                      <div className="absolute bottom-0 left-6 w-3 h-6 bg-blue-300 rounded"></div>
+                      <div className="absolute bottom-0 right-6 w-3 h-6 bg-blue-300 rounded"></div>
+                      <div className="absolute bottom-0 right-1 w-3 h-6 bg-blue-300 rounded"></div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Position indicators */}
+                <div className="absolute top-4 left-4 space-y-2">
+                  <div className="bg-blue-600 text-white px-3 py-2 rounded-lg font-bold shadow-lg">
+                    ✋ HEEL OF HAND
+                  </div>
+                  <div className="bg-blue-600 text-white px-3 py-2 rounded-lg font-bold shadow-lg">
+                    🎯 CENTER CHEST
+                  </div>
+                  <div className="bg-red-600 text-white px-3 py-2 rounded-lg font-bold shadow-lg animate-pulse">
+                    ⚠️ BETWEEN NIPPLES
+                  </div>
+                </div>
+                
+                {/* Arm position reminder */}
+                <div className="absolute top-4 right-4 bg-yellow-500 text-black px-3 py-2 rounded-lg font-bold shadow-lg border-2 border-yellow-600">
+                  💪 ARMS STRAIGHT
+                </div>
+              </div>
+            </div>
+            
+            {/* Step Guide */}
+            <div className="bg-blue-50 p-4 border-t-4 border-blue-500">
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="bg-white rounded-lg p-2 border-2 border-blue-300">
+                  <div className="text-2xl">✋</div>
+                  <div className="text-xs font-bold text-blue-600">HEEL ON CENTER</div>
+                </div>
+                <div className="bg-white rounded-lg p-2 border-2 border-blue-300">
+                  <div className="text-2xl">🤝</div>
+                  <div className="text-xs font-bold text-blue-600">INTERLACE FINGERS</div>
+                </div>
+                <div className="bg-white rounded-lg p-2 border-2 border-blue-300">
+                  <div className="text-2xl">💪</div>
+                  <div className="text-xs font-bold text-blue-600">STRAIGHT ARMS</div>
+                </div>
+              </div>
             </div>
           </div>
         );
       
       case 'compressions':
         return (
-          <div className="flex flex-col items-center space-y-4 bg-white p-6 rounded-lg shadow-lg">
-            <div className="relative w-96 h-64 bg-gradient-to-b from-gray-100 to-gray-200 rounded-lg overflow-hidden border-2 border-gray-300">
-              {/* Ultra close-up compression view */}
-              <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-                {/* Victim's chest with compression depth */}
-                <div className="w-48 h-24 bg-orange-400 rounded-lg relative border-2 border-orange-500">
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-sm font-bold text-orange-800">CHEST</div>
-                  
-                  {/* Compression depth indicator */}
-                  <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
-                    <div className="text-xs font-bold text-red-600">2"</div>
-                    <div className="w-1 h-8 bg-red-500"></div>
-                    <div className="text-xs font-bold text-red-600">MIN</div>
-                  </div>
+          <div className="relative w-full max-w-2xl mx-auto bg-white rounded-xl shadow-2xl border-4 border-red-500 overflow-hidden">
+            {/* Header Banner with Timer */}
+            <div className="bg-red-600 text-white py-3 px-6 text-center relative">
+              <div className="flex items-center justify-center gap-2">
+                <Activity className="w-8 h-8" />
+                <span className="text-2xl font-black">STEP 3: COMPRESSIONS</span>
+                <Activity className="w-8 h-8" />
+              </div>
+              
+              {/* MASSIVE Timer Display */}
+              {isActive && (
+                <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 bg-red-700 text-white rounded-2xl shadow-2xl border-8 border-red-800 px-8 py-4 z-20">
+                  <div className="text-6xl font-black animate-pulse">{compressionCount}</div>
+                  <div className="text-xl font-bold">/ 30</div>
                 </div>
-                
-                {/* Animated hands performing compressions */}
-                <div className={`absolute -top-12 left-1/2 transform -translate-x-1/2 transition-all duration-300 ${
-                  isActive ? 'animate-[compress_0.5s_ease-in-out_infinite]' : ''
-                }`}>
-                  {/* Rescuer's arms and hands - much more detailed */}
-                  <div className="relative">
-                    {/* Arms coming down */}
-                    <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 w-4 h-20 bg-blue-500 rounded"></div>
+              )}
+            </div>
+            
+            {/* Main Visual - Compression Action */}
+            <div className="relative h-80 bg-gradient-to-b from-red-100 to-red-200 p-6 pt-16">
+              <div className="relative w-full h-full flex items-center justify-center">
+                {/* Victim's chest with compression visualization */}
+                <div className="relative">
+                  <div className="w-64 h-32 bg-orange-400 rounded-2xl border-4 border-orange-600 shadow-2xl relative">
+                    <div className="absolute inset-2 bg-orange-300 rounded-xl"></div>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-orange-800 font-bold">CHEST</div>
                     
-                    {/* Hands compressed together */}
-                    <div className="w-18 h-20 bg-blue-300 rounded-lg border-2 border-blue-400 relative">
-                      <div className="w-full h-8 bg-blue-400 rounded-lg mt-2"></div>
-                      {/* Compression force indicator */}
-                      <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 text-xs font-bold text-red-600 animate-pulse">
-                        PUSH!
+                    {/* Compression depth indicator */}
+                    <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex flex-col items-center">
+                      <div className="text-red-600 font-black text-lg">2"</div>
+                      <div className="w-2 h-12 bg-red-500 rounded-full shadow-inner"></div>
+                      <div className="text-red-600 font-black text-sm">MIN</div>
+                    </div>
+                    
+                    {/* Compression waves */}
+                    {isActive && (
+                      <div className="absolute inset-0 bg-red-300 rounded-xl opacity-50 animate-[compress_0.5s_ease-in-out_infinite]"></div>
+                    )}
+                  </div>
+                  
+                  {/* Hands performing compressions - ANIMATED */}
+                  <div className={`absolute -top-20 left-1/2 transform -translate-x-1/2 transition-all duration-300 ${
+                    isActive ? 'animate-[compress_0.5s_ease-in-out_infinite]' : ''
+                  }`}>
+                    <div className="relative">
+                      {/* Arms coming down */}
+                      <div className="absolute -top-32 left-1/2 transform -translate-x-1/2 w-6 h-32 bg-blue-500 rounded-full shadow-lg"></div>
+                      
+                      {/* Hands stack */}
+                      <div className="w-28 h-32 bg-blue-300 rounded-2xl border-4 border-blue-500 shadow-2xl relative">
+                        <div className="absolute top-4 left-2 right-2 h-10 bg-blue-400 rounded-xl shadow-inner"></div>
+                        
+                        {/* Force arrows */}
+                        {isActive && (
+                          <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 text-red-600 font-black text-lg animate-bounce">
+                            ⬇️ PUSH! ⬇️
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              
-              {/* Live compression counter */}
-              {isActive && (
-                <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-lg animate-pulse border-2 border-red-700">
-                  <div className="text-3xl font-bold">{compressionCount}</div>
-                  <div className="text-sm">/ 30</div>
+                
+                {/* Rate metronome */}
+                <div className="absolute top-4 right-4">
+                  <div className={`w-12 h-12 rounded-full border-4 shadow-lg ${
+                    isActive ? 'bg-green-500 border-green-600 animate-pulse' : 'bg-gray-400 border-gray-500'
+                  }`}></div>
+                  <div className="text-center mt-2">
+                    <div className="text-green-600 font-bold text-sm">100-120</div>
+                    <div className="text-green-600 font-bold text-xs">/min</div>
+                  </div>
                 </div>
-              )}
-              
-              {/* Rate indicator */}
-              <div className="absolute top-4 right-4">
-                <div className={`w-6 h-6 rounded-full ${isActive ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
-                <div className="text-xs font-bold text-green-600 mt-1">100-120/min</div>
-              </div>
-              
-              {/* Force and depth indicators */}
-              <div className="absolute bottom-4 left-4 bg-red-600 text-white px-2 py-1 rounded text-xs font-bold animate-bounce">
-                HARD & FAST
-              </div>
-              
-              {/* Body position reminder */}
-              <div className="absolute bottom-4 right-4 bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold">
-                ARMS STRAIGHT
+                
+                {/* Key reminders */}
+                <div className="absolute bottom-4 left-4 space-y-2">
+                  <div className="bg-red-600 text-white px-3 py-2 rounded-lg font-bold shadow-lg animate-bounce">
+                    💥 HARD & FAST
+                  </div>
+                  <div className="bg-yellow-500 text-black px-3 py-2 rounded-lg font-bold shadow-lg">
+                    ↩️ FULL RECOIL
+                  </div>
+                </div>
               </div>
             </div>
             
-            <div className="text-center space-y-1">
-              <div className="text-xl font-bold text-red-600">3. CHEST COMPRESSIONS</div>
-              <div className="text-sm text-gray-600">Push HARD & FAST • 2+ inches deep</div>
+            {/* Progress Bar */}
+            <div className="bg-red-50 p-4 border-t-4 border-red-500">
+              <div className="w-full bg-gray-300 rounded-full h-4 shadow-inner">
+                <div 
+                  className="bg-red-500 h-4 rounded-full transition-all duration-300 shadow-lg"
+                  style={{ width: `${(compressionCount / 30) * 100}%` }}
+                ></div>
+              </div>
+              <div className="text-center mt-2 text-red-600 font-bold">
+                {isActive ? `${compressionCount} / 30 Compressions` : 'Ready to Start'}
+              </div>
             </div>
           </div>
         );
       
       case 'breathing':
         return (
-          <div className="flex flex-col items-center space-y-4 bg-white p-6 rounded-lg shadow-lg">
-            <div className="relative w-96 h-64 bg-gradient-to-b from-gray-100 to-gray-200 rounded-lg overflow-hidden border-2 border-gray-300">
-              {/* Close-up airway management */}
-              <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-                {/* Victim's head and neck - detailed view */}
-                <div className="relative">
-                  {/* Head tilted back */}
-                  <div className="w-32 h-20 bg-skin-tone rounded-full transform -rotate-12 relative border-2 border-skin-tone-dark">
-                    {/* Facial features */}
-                    <div className="absolute top-3 left-6 w-2 h-2 bg-gray-700 rounded-full"></div> {/* Eye */}
-                    <div className="absolute top-3 right-8 w-2 h-2 bg-gray-700 rounded-full"></div> {/* Eye */}
-                    
-                    {/* Nose */}
-                    <div className="absolute top-4 right-6 w-3 h-4 bg-skin-tone-dark rounded"></div>
-                    
-                    {/* Mouth open for breathing */}
-                    <div className="absolute bottom-4 right-8 w-6 h-3 bg-red-400 rounded-full border border-red-500"></div>
-                  </div>
-                  
-                  {/* Rescuer's hand on forehead */}
-                  <div className="absolute -top-6 left-4 w-10 h-8 bg-blue-300 rounded border border-blue-400">
-                    <div className="w-full h-3 bg-blue-400 rounded mt-1"></div>
-                  </div>
-                  
-                  {/* Hand pinching nose */}
-                  <div className="absolute top-0 right-4 w-6 h-8 bg-blue-300 rounded animate-pulse border border-blue-400">
-                    <div className="w-full h-3 bg-blue-400 rounded mt-1"></div>
-                  </div>
-                  
-                  {/* Rescue breath visualization */}
-                  <div className="absolute -right-12 top-6 animate-pulse">
-                    <div className="text-4xl">💨</div>
-                    <div className="text-xs font-bold text-blue-600">BREATH</div>
-                  </div>
-                </div>
-                
-                {/* Orange shirt/body */}
-                <div className="w-40 h-16 bg-orange-400 rounded-lg mt-4 border-2 border-orange-500">
-                  <div className="absolute top-1 left-1/2 transform -translate-x-1/2 text-xs font-bold text-white">VICTIM</div>
-                </div>
-              </div>
-              
-              {/* Step indicators */}
-              <div className="absolute top-4 left-4 space-y-1">
-                <div className="text-xs bg-white border border-blue-500 p-1 rounded font-bold">1. TILT HEAD</div>
-                <div className="text-xs bg-white border border-blue-500 p-1 rounded font-bold">2. LIFT CHIN</div>
-                <div className="text-xs bg-white border border-blue-500 p-1 rounded font-bold">3. PINCH NOSE</div>
-                <div className="text-xs bg-white border border-blue-500 p-1 rounded font-bold">4. SEAL & BREATHE</div>
-              </div>
-              
-              {/* Breath counter */}
-              <div className="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-lg border-2 border-blue-700">
-                <div className="text-lg font-bold">2</div>
-                <div className="text-xs">BREATHS</div>
-              </div>
-              
-              {/* Timing indicator */}
-              <div className="absolute bottom-4 right-4 bg-yellow-500 text-black px-2 py-1 rounded text-xs font-bold animate-pulse">
-                1 SEC EACH
+          <div className="relative w-full max-w-2xl mx-auto bg-white rounded-xl shadow-2xl border-4 border-blue-500 overflow-hidden">
+            {/* Header Banner */}
+            <div className="bg-blue-600 text-white py-3 px-6 text-center">
+              <div className="flex items-center justify-center gap-2">
+                <Activity className="w-8 h-8" />
+                <span className="text-2xl font-black">STEP 4: RESCUE BREATHS</span>
+                <Activity className="w-8 h-8" />
               </div>
             </div>
             
-            <div className="text-center space-y-1">
-              <div className="text-xl font-bold text-blue-600">4. RESCUE BREATHS</div>
-              <div className="text-sm text-gray-600">Open airway • 2 breaths • 1 second each</div>
+            {/* Main Visual - Airway Management */}
+            <div className="relative h-80 bg-gradient-to-b from-blue-100 to-blue-200 p-6">
+              <div className="relative w-full h-full flex items-center justify-center">
+                {/* Close-up head and airway */}
+                <div className="relative">
+                  {/* Head positioned for airway opening */}
+                  <div className="w-48 h-32 bg-skin-tone rounded-full border-4 border-skin-tone-dark shadow-2xl transform -rotate-12 relative">
+                    {/* Facial features */}
+                    <div className="absolute top-6 left-8 w-3 h-3 bg-gray-800 rounded-full"></div>
+                    <div className="absolute top-6 right-12 w-3 h-3 bg-gray-800 rounded-full"></div>
+                    
+                    {/* Nose */}
+                    <div className="absolute top-8 right-8 w-4 h-6 bg-skin-tone-dark rounded shadow-inner"></div>
+                    
+                    {/* Mouth open for breathing */}
+                    <div className="absolute bottom-6 right-12 w-8 h-4 bg-red-400 rounded-full border-2 border-red-500 shadow-inner"></div>
+                    
+                    {/* Airway visualization */}
+                    <div className="absolute bottom-0 right-6 w-2 h-8 bg-pink-300 rounded-full opacity-70"></div>
+                  </div>
+                  
+                  {/* Hand on forehead - tilting head */}
+                  <div className="absolute -top-8 left-8 w-16 h-12 bg-blue-300 rounded-lg border-2 border-blue-400 shadow-lg">
+                    <div className="absolute top-2 left-2 right-2 h-4 bg-blue-400 rounded shadow-inner"></div>
+                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-1 py-0.5 rounded text-xs font-bold">
+                      TILT
+                    </div>
+                  </div>
+                  
+                  {/* Hand lifting chin */}
+                  <div className="absolute bottom-4 right-2 w-12 h-10 bg-blue-300 rounded-lg border-2 border-blue-400 shadow-lg">
+                    <div className="absolute top-1 left-1 right-1 h-3 bg-blue-400 rounded shadow-inner"></div>
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-1 py-0.5 rounded text-xs font-bold">
+                      LIFT
+                    </div>
+                  </div>
+                  
+                  {/* Hand pinching nose */}
+                  <div className="absolute top-4 right-4 w-8 h-10 bg-blue-300 rounded border-2 border-blue-400 shadow-lg animate-pulse">
+                    <div className="absolute top-1 left-1 right-1 h-3 bg-blue-400 rounded shadow-inner"></div>
+                    <div className="absolute -right-6 top-1/2 transform -translate-y-1/2 bg-red-600 text-white px-1 py-0.5 rounded text-xs font-bold">
+                      PINCH
+                    </div>
+                  </div>
+                  
+                  {/* Breath visualization */}
+                  <div className="absolute -right-16 top-8 animate-pulse">
+                    <div className="text-5xl">💨</div>
+                    <div className="text-center text-blue-600 font-bold text-sm">1 SEC</div>
+                  </div>
+                </div>
+                
+                {/* Step-by-step guide */}
+                <div className="absolute top-4 left-4 space-y-2">
+                  <div className="bg-white border-2 border-blue-500 rounded-lg p-2 shadow-lg">
+                    <div className="text-blue-600 font-bold text-sm">1️⃣ TILT HEAD BACK</div>
+                  </div>
+                  <div className="bg-white border-2 border-blue-500 rounded-lg p-2 shadow-lg">
+                    <div className="text-blue-600 font-bold text-sm">2️⃣ LIFT CHIN UP</div>
+                  </div>
+                  <div className="bg-white border-2 border-blue-500 rounded-lg p-2 shadow-lg">
+                    <div className="text-blue-600 font-bold text-sm">3️⃣ PINCH NOSE</div>
+                  </div>
+                  <div className="bg-white border-2 border-blue-500 rounded-lg p-2 shadow-lg">
+                    <div className="text-blue-600 font-bold text-sm">4️⃣ SEAL & BREATHE</div>
+                  </div>
+                </div>
+                
+                {/* Breath counter */}
+                <div className="absolute top-4 right-4 bg-blue-600 text-white rounded-2xl p-4 shadow-2xl border-4 border-blue-700">
+                  <div className="text-3xl font-black">2</div>
+                  <div className="text-sm font-bold">BREATHS</div>
+                </div>
+                
+                {/* Timing emphasis */}
+                <div className="absolute bottom-4 right-4 bg-yellow-500 text-black px-4 py-2 rounded-lg font-bold shadow-lg border-2 border-yellow-600 animate-pulse">
+                  ⏱️ 1 SECOND EACH
+                </div>
+              </div>
+            </div>
+            
+            {/* Action Guide */}
+            <div className="bg-blue-50 p-4 border-t-4 border-blue-500">
+              <div className="grid grid-cols-4 gap-2 text-center">
+                <div className="bg-white rounded-lg p-2 border-2 border-blue-300">
+                  <div className="text-2xl">🔄</div>
+                  <div className="text-xs font-bold text-blue-600">TILT HEAD</div>
+                </div>
+                <div className="bg-white rounded-lg p-2 border-2 border-blue-300">
+                  <div className="text-2xl">☝️</div>
+                  <div className="text-xs font-bold text-blue-600">LIFT CHIN</div>
+                </div>
+                <div className="bg-white rounded-lg p-2 border-2 border-blue-300">
+                  <div className="text-2xl">🤏</div>
+                  <div className="text-xs font-bold text-blue-600">PINCH NOSE</div>
+                </div>
+                <div className="bg-white rounded-lg p-2 border-2 border-blue-300">
+                  <div className="text-2xl">💨</div>
+                  <div className="text-xs font-bold text-blue-600">2 BREATHS</div>
+                </div>
+              </div>
             </div>
           </div>
         );
       
       case 'cycles':
         return (
-          <div className="flex flex-col items-center space-y-4 bg-white p-6 rounded-lg shadow-lg">
-            <div className="relative w-96 h-64 bg-gradient-to-b from-gray-100 to-gray-200 rounded-lg overflow-hidden border-2 border-gray-300">
-              {/* Side-by-side cycle demonstration */}
-              <div className="absolute inset-4 grid grid-cols-2 gap-4">
-                {/* Compression phase */}
-                <div className="relative bg-red-100 border-2 border-red-500 rounded-lg p-2">
-                  <div className="text-center mb-2">
-                    <div className="text-sm font-bold text-red-600">COMPRESSIONS</div>
+          <div className="relative w-full max-w-2xl mx-auto bg-white rounded-xl shadow-2xl border-4 border-green-500 overflow-hidden">
+            {/* Header Banner */}
+            <div className="bg-green-600 text-white py-3 px-6 text-center relative">
+              <div className="flex items-center justify-center gap-2">
+                <Zap className="w-8 h-8" />
+                <span className="text-2xl font-black">STEP 5: REPEAT CYCLES</span>
+                <Zap className="w-8 h-8" />
+              </div>
+              
+              {/* Cycle Counter */}
+              {isActive && (
+                <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-green-700 text-white rounded-2xl shadow-2xl border-8 border-green-800 px-6 py-3 z-20">
+                  <div className="text-3xl font-black">CYCLE {cycleCount + 1}</div>
+                </div>
+              )}
+            </div>
+            
+            {/* Main Visual - Cycle Flow */}
+            <div className="relative h-80 bg-gradient-to-b from-green-100 to-green-200 p-6 pt-16">
+              <div className="relative w-full h-full">
+                {/* Two-phase demonstration */}
+                <div className="absolute inset-8 grid grid-cols-2 gap-8">
+                  {/* Compression Phase */}
+                  <div className="relative bg-red-100 border-4 border-red-500 rounded-2xl p-4 shadow-2xl">
+                    <div className="text-center mb-4">
+                      <div className="text-lg font-black text-red-600">COMPRESSIONS</div>
+                    </div>
+                    
+                    {/* Mini compression demo */}
+                    <div className="relative flex items-center justify-center h-24">
+                      <div className="w-24 h-16 bg-orange-400 rounded-lg border-2 border-orange-500 shadow-lg"></div>
+                      <div className={`absolute -top-8 w-12 h-16 bg-blue-300 rounded-lg border-2 border-blue-400 shadow-lg ${
+                        isActive ? 'animate-bounce' : ''
+                      }`}></div>
+                    </div>
+                    
+                    <div className="text-center mt-4">
+                      <div className="text-4xl font-black text-red-600">30</div>
+                      <div className="text-sm font-bold text-red-500">PUSHES</div>
+                    </div>
                   </div>
                   
-                  {/* Mini compression demo */}
-                  <div className="relative">
-                    <div className="w-20 h-12 bg-orange-400 rounded mx-auto border border-orange-500"></div>
-                    <div className={`absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-12 bg-blue-300 rounded border border-blue-400 ${
-                      isActive ? 'animate-pulse' : ''
-                    }`}></div>
-                  </div>
-                  
-                  <div className="text-center mt-2">
-                    <div className="text-2xl font-bold text-red-600">30</div>
-                    <div className="text-xs text-red-500">PUSHES</div>
+                  {/* Breathing Phase */}
+                  <div className="relative bg-blue-100 border-4 border-blue-500 rounded-2xl p-4 shadow-2xl">
+                    <div className="text-center mb-4">
+                      <div className="text-lg font-black text-blue-600">BREATHS</div>
+                    </div>
+                    
+                    {/* Mini breathing demo */}
+                    <div className="relative flex items-center justify-center h-24">
+                      <div className="w-20 h-12 bg-skin-tone rounded-full border-2 border-skin-tone-dark shadow-lg transform -rotate-12"></div>
+                      <div className="absolute -right-4 top-4 text-3xl animate-pulse">💨</div>
+                    </div>
+                    
+                    <div className="text-center mt-4">
+                      <div className="text-4xl font-black text-blue-600">2</div>
+                      <div className="text-sm font-bold text-blue-500">BREATHS</div>
+                    </div>
                   </div>
                 </div>
                 
-                {/* Breathing phase */}
-                <div className="relative bg-blue-100 border-2 border-blue-500 rounded-lg p-2">
-                  <div className="text-center mb-2">
-                    <div className="text-sm font-bold text-blue-600">BREATHS</div>
-                  </div>
-                  
-                  {/* Mini breathing demo */}
-                  <div className="relative">
-                    <div className="w-16 h-10 bg-skin-tone rounded-full mx-auto border border-skin-tone-dark transform -rotate-12"></div>
-                    <div className="absolute -right-2 top-2 text-lg animate-pulse">💨</div>
-                  </div>
-                  
-                  <div className="text-center mt-2">
-                    <div className="text-2xl font-bold text-blue-600">2</div>
-                    <div className="text-xs text-blue-500">BREATHS</div>
-                  </div>
+                {/* Flow arrows */}
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl text-green-600 animate-pulse z-10">
+                  ↔️
                 </div>
-              </div>
-              
-              {/* Cycle counter */}
-              {isActive && (
-                <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg border-2 border-green-700">
-                  <div className="text-center">
-                    <div className="text-lg font-bold">CYCLE {cycleCount + 1}</div>
-                    <div className="text-xs">IN PROGRESS</div>
-                  </div>
+                
+                {/* Critical warning */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-2xl font-black shadow-2xl border-4 border-red-700 animate-pulse text-center">
+                  ⚠️ DON'T STOP UNTIL EMS ARRIVES ⚠️
                 </div>
-              )}
-              
-              {/* Don't stop warning */}
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-black px-3 py-1 rounded text-xs font-bold animate-pulse border-2 border-yellow-600">
-                DON'T STOP UNTIL EMS ARRIVES
-              </div>
-              
-              {/* Arrows showing cycle flow */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl text-gray-600 animate-pulse">
-                ↔️
               </div>
             </div>
             
-            <div className="text-center space-y-1">
-              <div className="text-xl font-bold text-green-600">5. REPEAT CYCLES</div>
-              <div className="text-sm text-gray-600">30 compressions → 2 breaths → Repeat</div>
+            {/* Cycle Guide */}
+            <div className="bg-green-50 p-4 border-t-4 border-green-500">
+              <div className="text-center space-y-2">
+                <div className="text-2xl font-black text-green-600">30 COMPRESSIONS ➡️ 2 BREATHS ➡️ REPEAT</div>
+                <div className="text-sm text-green-700 font-bold">Continue until emergency medical services arrive</div>
+              </div>
             </div>
           </div>
         );
