@@ -4,6 +4,13 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Mic, MicOff, Heart, Volume2, User, Hand, Smartphone, Eye, Stethoscope, Activity, Zap, Timer, ArrowRight, Phone, ChevronLeft, ChevronRight } from 'lucide-react';
 
+// Import CPR instruction images
+import cprCheckResponsiveness from '@/assets/cpr-check-responsiveness.png';
+import cprHandPosition from '@/assets/cpr-hand-position.png';
+import cprCompressions from '@/assets/cpr-compressions.png';
+import cprAirway from '@/assets/cpr-airway.png';
+import cprRescueBreath from '@/assets/cpr-rescue-breath.png';
+
 interface CPRGuideProps {
   onBack: () => void;
 }
@@ -114,16 +121,31 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
   }, [requestWakeLock, isListening]);
 
   const handleVoiceCommand = (command: string) => {
-    if (command.includes('start cpr') || command.includes('initiate cpr') || command.includes('begin cpr')) {
+    // Enhanced medical-grade voice commands
+    if (command.includes('start cpr') || command.includes('initiate cpr') || command.includes('begin cpr') || 
+        command.includes('start compressions') || command.includes('begin compressions')) {
       startCPR();
-    } else if (command.includes('stop') || command.includes('pause')) {
+      speak("Starting CPR now. Following the beat.");
+    } else if (command.includes('stop') || command.includes('pause') || command.includes('pause instructions')) {
       stopCPR();
-    } else if (command.includes('next step') || command.includes('next')) {
+      speak("CPR paused.");
+    } else if (command.includes('next step') || command.includes('next') || command.includes('continue')) {
       nextStep();
-    } else if (command.includes('go back') || command.includes('previous')) {
+      speak("Moving to next step.");
+    } else if (command.includes('go back') || command.includes('previous') || command.includes('back')) {
       previousStep();
-    } else if (command.includes('repeat') || command.includes('again')) {
+      speak("Going back to previous step.");
+    } else if (command.includes('repeat') || command.includes('again') || command.includes('repeat that') || 
+               command.includes('say it again') || command.includes('repeat last step')) {
       speakCurrentInstruction();
+    } else if (command.includes('call 911') || command.includes('call nine one one')) {
+      speak("Call 911 immediately. Tell them you need emergency medical services for CPR.");
+      // Try to initiate phone call
+      if ('tel:' in window.location) {
+        window.location.href = 'tel:911';
+      }
+    } else if (command.includes('help') || command.includes('commands')) {
+      speak("Available commands: Start CPR, Stop, Next step, Previous, Repeat, Call 911.");
     }
   };
 
@@ -234,79 +256,26 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
             <div className="bg-red-600 text-white py-3 px-6 text-center">
               <div className="flex items-center justify-center gap-2">
                 <Phone className="w-8 h-8" />
-                <span className="text-2xl font-black">STEP 1: CALL 911</span>
+                <span className="text-2xl font-black">STEP 1: CHECK & CALL</span>
                 <Phone className="w-8 h-8" />
               </div>
             </div>
             
-            {/* Main Visual */}
-            <div className="relative h-80 bg-gradient-to-b from-blue-100 to-blue-200 p-6">
-              {/* Scene Layout */}
-              <div className="relative w-full h-full">
-                {/* Person on ground - large and detailed */}
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-                  <div className="relative">
-                    {/* Body */}
-                    <div className="w-48 h-20 bg-orange-400 rounded-lg border-4 border-orange-600 relative shadow-lg">
-                      <div className="absolute inset-2 bg-orange-300 rounded"></div>
-                      <div className="absolute top-2 left-1/2 transform -translate-x-1/2 text-white font-bold text-sm">VICTIM</div>
-                    </div>
-                    
-                    {/* Head */}
-                    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-24 h-24 bg-skin-tone rounded-full border-4 border-skin-tone-dark shadow-lg">
-                      {/* Eyes closed */}
-                      <div className="absolute top-5 left-4 w-3 h-1 bg-gray-800 rounded-full"></div>
-                      <div className="absolute top-5 right-4 w-3 h-1 bg-gray-800 rounded-full"></div>
-                      {/* Mouth */}
-                      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-4 h-2 bg-red-300 rounded-full"></div>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Rescuer checking responsiveness */}
-                <div className="absolute top-8 left-8">
-                  <div className="relative">
-                    {/* Rescuer figure */}
-                    <div className="w-20 h-20 bg-blue-300 rounded-full border-4 border-blue-500 shadow-lg">
-                      <div className="absolute top-3 left-3 w-2 h-2 bg-gray-800 rounded-full"></div>
-                      <div className="absolute top-3 right-3 w-2 h-2 bg-gray-800 rounded-full"></div>
-                      <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 w-6 h-3 bg-red-400 rounded-full"></div>
-                    </div>
-                    <div className="w-24 h-16 bg-blue-600 rounded-lg mt-2 border-2 border-blue-700 shadow-lg"></div>
-                    
-                    {/* Tapping motion */}
-                    <div className="absolute -right-4 top-8 animate-bounce">
-                      <div className="w-10 h-12 bg-blue-300 rounded-lg border-2 border-blue-400 transform rotate-45"></div>
-                      <div className="absolute -bottom-2 -right-2 text-2xl animate-pulse">👋</div>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Speech bubble */}
-                <div className="absolute top-2 left-32 bg-white border-4 border-red-500 rounded-xl p-3 shadow-lg animate-pulse">
-                  <div className="text-lg font-black text-red-600">"HEY! ARE YOU OK?"</div>
-                  <div className="absolute bottom-0 left-8 w-0 h-0 border-l-4 border-r-4 border-t-8 border-transparent border-t-white transform translate-y-full"></div>
-                </div>
-                
-                {/* Phone call visualization */}
-                <div className="absolute top-8 right-8">
-                  <div className="relative">
-                    <div className="w-16 h-16 bg-green-500 rounded-full border-4 border-green-600 animate-pulse shadow-lg flex items-center justify-center">
-                      <Phone className="w-8 h-8 text-white" />
-                    </div>
-                    <div className="absolute -bottom-2 -left-2 bg-red-600 text-white px-2 py-1 rounded font-bold text-sm animate-pulse">
-                      911
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Check breathing indicator */}
-                <div className="absolute bottom-16 right-12">
-                  <div className="bg-yellow-400 border-2 border-yellow-600 rounded-lg p-2 animate-pulse">
-                    <Eye className="w-6 h-6 text-yellow-800" />
-                    <div className="text-xs font-bold text-yellow-800">CHECK BREATHING</div>
-                  </div>
-                </div>
+            {/* Real Human Figure Image */}
+            <div className="relative h-80 bg-white overflow-hidden">
+              <img 
+                src={cprCheckResponsiveness} 
+                alt="Person checking responsiveness of unconscious victim" 
+                className="w-full h-full object-contain"
+              />
+              
+              {/* Overlay with critical instructions */}
+              <div className="absolute top-4 left-4 bg-red-600 text-white px-4 py-2 rounded-lg font-bold shadow-lg animate-pulse">
+                📱 CALL 911 FIRST
+              </div>
+              
+              <div className="absolute bottom-4 right-4 bg-yellow-500 text-black px-4 py-2 rounded-lg font-bold shadow-lg">
+                👋 TAP & SHOUT
               </div>
             </div>
             
@@ -346,78 +315,25 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
               </div>
             </div>
             
-            {/* Main Visual - Ultra close-up of chest and hands */}
-            <div className="relative h-80 bg-gradient-to-b from-orange-100 to-orange-200 p-6">
-              <div className="relative w-full h-full flex items-center justify-center">
-                {/* Victim's chest - HUGE and detailed */}
-                <div className="relative">
-                  <div className="w-80 h-40 bg-orange-400 rounded-2xl border-4 border-orange-600 shadow-2xl relative">
-                    {/* Anatomical markers */}
-                    <div className="absolute top-6 left-16 w-4 h-4 bg-orange-700 rounded-full shadow-inner"></div>
-                    <div className="absolute top-6 right-16 w-4 h-4 bg-orange-700 rounded-full shadow-inner"></div>
-                    
-                    {/* Center line guide */}
-                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-2 h-full bg-red-500 opacity-60 rounded-full"></div>
-                    
-                    {/* Compression target zone */}
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border-8 border-red-500 rounded-full bg-red-100 opacity-80 animate-pulse flex items-center justify-center">
-                      <div className="text-red-700 font-black text-sm">TARGET</div>
-                    </div>
-                    
-                    {/* Ribs visualization */}
-                    <div className="absolute inset-4 opacity-30">
-                      <div className="w-full h-1 bg-orange-800 rounded mb-2"></div>
-                      <div className="w-full h-1 bg-orange-800 rounded mb-2"></div>
-                      <div className="w-full h-1 bg-orange-800 rounded mb-2"></div>
-                      <div className="w-full h-1 bg-orange-800 rounded"></div>
-                    </div>
-                  </div>
-                  
-                  {/* Hands positioning - DETAILED */}
-                  <div className="absolute -top-24 left-1/2 transform -translate-x-1/2">
-                    {/* Bottom hand */}
-                    <div className="relative w-32 h-40 bg-blue-300 rounded-2xl border-4 border-blue-500 shadow-2xl animate-pulse">
-                      <div className="absolute top-4 left-4 right-4 h-12 bg-blue-400 rounded-xl shadow-inner"></div>
-                      {/* Heel of hand indicator */}
-                      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
-                        HEEL
-                      </div>
-                      {/* Fingers */}
-                      <div className="absolute bottom-0 left-2 w-4 h-8 bg-blue-400 rounded-lg"></div>
-                      <div className="absolute bottom-0 left-8 w-4 h-8 bg-blue-400 rounded-lg"></div>
-                      <div className="absolute bottom-0 right-8 w-4 h-8 bg-blue-400 rounded-lg"></div>
-                      <div className="absolute bottom-0 right-2 w-4 h-8 bg-blue-400 rounded-lg"></div>
-                    </div>
-                    
-                    {/* Top hand - interlaced */}
-                    <div className="absolute top-8 left-4 w-24 h-32 bg-blue-200 rounded-xl border-4 border-blue-400 shadow-xl opacity-90">
-                      <div className="absolute top-2 left-2 right-2 h-8 bg-blue-300 rounded-lg shadow-inner"></div>
-                      {/* Interlaced fingers pattern */}
-                      <div className="absolute bottom-0 left-1 w-3 h-6 bg-blue-300 rounded"></div>
-                      <div className="absolute bottom-0 left-6 w-3 h-6 bg-blue-300 rounded"></div>
-                      <div className="absolute bottom-0 right-6 w-3 h-6 bg-blue-300 rounded"></div>
-                      <div className="absolute bottom-0 right-1 w-3 h-6 bg-blue-300 rounded"></div>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Position indicators */}
-                <div className="absolute top-4 left-4 space-y-2">
-                  <div className="bg-blue-600 text-white px-3 py-2 rounded-lg font-bold shadow-lg">
-                    ✋ HEEL OF HAND
-                  </div>
-                  <div className="bg-blue-600 text-white px-3 py-2 rounded-lg font-bold shadow-lg">
-                    🎯 CENTER CHEST
-                  </div>
-                  <div className="bg-red-600 text-white px-3 py-2 rounded-lg font-bold shadow-lg animate-pulse">
-                    ⚠️ BETWEEN NIPPLES
-                  </div>
-                </div>
-                
-                {/* Arm position reminder */}
-                <div className="absolute top-4 right-4 bg-yellow-500 text-black px-3 py-2 rounded-lg font-bold shadow-lg border-2 border-yellow-600">
-                  💪 ARMS STRAIGHT
-                </div>
+            {/* Real Human Figure Image */}
+            <div className="relative h-80 bg-white overflow-hidden">
+              <img 
+                src={cprHandPosition} 
+                alt="Proper hand positioning for CPR compressions" 
+                className="w-full h-full object-contain"
+              />
+              
+              {/* Overlay instructions */}
+              <div className="absolute top-4 left-4 bg-blue-600 text-white px-4 py-2 rounded-lg font-bold shadow-lg">
+                ✋ HEEL OF HAND
+              </div>
+              
+              <div className="absolute bottom-4 right-4 bg-yellow-500 text-black px-4 py-2 rounded-lg font-bold shadow-lg">
+                💪 ARMS STRAIGHT
+              </div>
+              
+              <div className="absolute top-4 right-4 bg-red-600 text-white px-4 py-2 rounded-lg font-bold shadow-lg animate-pulse">
+                🎯 CENTER CHEST
               </div>
             </div>
             
@@ -452,7 +368,7 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
                 <Activity className="w-8 h-8" />
               </div>
               
-              {/* MASSIVE Timer Display */}
+              {/* Compression Counter */}
               {isActive && (
                 <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 bg-red-700 text-white rounded-2xl shadow-2xl border-8 border-red-800 px-8 py-4 z-20">
                   <div className="text-6xl font-black animate-pulse">{compressionCount}</div>
@@ -461,71 +377,34 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
               )}
             </div>
             
-            {/* Main Visual - Compression Action */}
-            <div className="relative h-80 bg-gradient-to-b from-red-100 to-red-200 p-6 pt-16">
-              <div className="relative w-full h-full flex items-center justify-center">
-                {/* Victim's chest with compression visualization */}
-                <div className="relative">
-                  <div className="w-64 h-32 bg-orange-400 rounded-2xl border-4 border-orange-600 shadow-2xl relative">
-                    <div className="absolute inset-2 bg-orange-300 rounded-xl"></div>
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-orange-800 font-bold">CHEST</div>
-                    
-                    {/* Compression depth indicator */}
-                    <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex flex-col items-center">
-                      <div className="text-red-600 font-black text-lg">2"</div>
-                      <div className="w-2 h-12 bg-red-500 rounded-full shadow-inner"></div>
-                      <div className="text-red-600 font-black text-sm">MIN</div>
-                    </div>
-                    
-                    {/* Compression waves */}
-                    {isActive && (
-                      <div className="absolute inset-0 bg-red-300 rounded-xl opacity-50 animate-[compress_0.5s_ease-in-out_infinite]"></div>
-                    )}
-                  </div>
-                  
-                  {/* Hands performing compressions - ANIMATED */}
-                  <div className={`absolute -top-20 left-1/2 transform -translate-x-1/2 transition-all duration-300 ${
-                    isActive ? 'animate-[compress_0.5s_ease-in-out_infinite]' : ''
-                  }`}>
-                    <div className="relative">
-                      {/* Arms coming down */}
-                      <div className="absolute -top-32 left-1/2 transform -translate-x-1/2 w-6 h-32 bg-blue-500 rounded-full shadow-lg"></div>
-                      
-                      {/* Hands stack */}
-                      <div className="w-28 h-32 bg-blue-300 rounded-2xl border-4 border-blue-500 shadow-2xl relative">
-                        <div className="absolute top-4 left-2 right-2 h-10 bg-blue-400 rounded-xl shadow-inner"></div>
-                        
-                        {/* Force arrows */}
-                        {isActive && (
-                          <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 text-red-600 font-black text-lg animate-bounce">
-                            ⬇️ PUSH! ⬇️
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
+            {/* Real Human Figure Image */}
+            <div className="relative h-80 bg-white overflow-hidden pt-16">
+              <img 
+                src={cprCompressions} 
+                alt="Person performing chest compressions during CPR" 
+                className="w-full h-full object-contain"
+              />
+              
+              {/* Metronome Visual (animated pulsing circle) */}
+              <div className="absolute top-8 right-4">
+                <div className={`w-16 h-16 rounded-full border-4 shadow-lg flex items-center justify-center ${
+                  isActive ? 'bg-green-500 border-green-600 animate-[pulse_0.5s_ease-in-out_infinite]' : 'bg-gray-400 border-gray-500'
+                }`}>
+                  <div className="text-white font-bold text-xs">120<br/>BPM</div>
                 </div>
-                
-                {/* Rate metronome */}
-                <div className="absolute top-4 right-4">
-                  <div className={`w-12 h-12 rounded-full border-4 shadow-lg ${
-                    isActive ? 'bg-green-500 border-green-600 animate-pulse' : 'bg-gray-400 border-gray-500'
-                  }`}></div>
-                  <div className="text-center mt-2">
-                    <div className="text-green-600 font-bold text-sm">100-120</div>
-                    <div className="text-green-600 font-bold text-xs">/min</div>
-                  </div>
-                </div>
-                
-                {/* Key reminders */}
-                <div className="absolute bottom-4 left-4 space-y-2">
-                  <div className="bg-red-600 text-white px-3 py-2 rounded-lg font-bold shadow-lg animate-bounce">
-                    💥 HARD & FAST
-                  </div>
-                  <div className="bg-yellow-500 text-black px-3 py-2 rounded-lg font-bold shadow-lg">
-                    ↩️ FULL RECOIL
-                  </div>
-                </div>
+              </div>
+              
+              {/* Critical overlays */}
+              <div className="absolute top-8 left-4 bg-red-600 text-white px-4 py-2 rounded-lg font-bold shadow-lg animate-pulse">
+                💥 PUSH HARD
+              </div>
+              
+              <div className="absolute bottom-8 left-4 bg-yellow-500 text-black px-4 py-2 rounded-lg font-bold shadow-lg">
+                📏 2 INCHES DEEP
+              </div>
+              
+              <div className="absolute bottom-8 right-4 bg-blue-600 text-white px-4 py-2 rounded-lg font-bold shadow-lg">
+                ↩️ FULL RECOIL
               </div>
             </div>
             
@@ -556,84 +435,44 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
               </div>
             </div>
             
-            {/* Main Visual - Airway Management */}
-            <div className="relative h-80 bg-gradient-to-b from-blue-100 to-blue-200 p-6">
-              <div className="relative w-full h-full flex items-center justify-center">
-                {/* Close-up head and airway */}
-                <div className="relative">
-                  {/* Head positioned for airway opening */}
-                  <div className="w-48 h-32 bg-skin-tone rounded-full border-4 border-skin-tone-dark shadow-2xl transform -rotate-12 relative">
-                    {/* Facial features */}
-                    <div className="absolute top-6 left-8 w-3 h-3 bg-gray-800 rounded-full"></div>
-                    <div className="absolute top-6 right-12 w-3 h-3 bg-gray-800 rounded-full"></div>
-                    
-                    {/* Nose */}
-                    <div className="absolute top-8 right-8 w-4 h-6 bg-skin-tone-dark rounded shadow-inner"></div>
-                    
-                    {/* Mouth open for breathing */}
-                    <div className="absolute bottom-6 right-12 w-8 h-4 bg-red-400 rounded-full border-2 border-red-500 shadow-inner"></div>
-                    
-                    {/* Airway visualization */}
-                    <div className="absolute bottom-0 right-6 w-2 h-8 bg-pink-300 rounded-full opacity-70"></div>
-                  </div>
-                  
-                  {/* Hand on forehead - tilting head */}
-                  <div className="absolute -top-8 left-8 w-16 h-12 bg-blue-300 rounded-lg border-2 border-blue-400 shadow-lg">
-                    <div className="absolute top-2 left-2 right-2 h-4 bg-blue-400 rounded shadow-inner"></div>
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-1 py-0.5 rounded text-xs font-bold">
-                      TILT
-                    </div>
-                  </div>
-                  
-                  {/* Hand lifting chin */}
-                  <div className="absolute bottom-4 right-2 w-12 h-10 bg-blue-300 rounded-lg border-2 border-blue-400 shadow-lg">
-                    <div className="absolute top-1 left-1 right-1 h-3 bg-blue-400 rounded shadow-inner"></div>
-                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-1 py-0.5 rounded text-xs font-bold">
-                      LIFT
-                    </div>
-                  </div>
-                  
-                  {/* Hand pinching nose */}
-                  <div className="absolute top-4 right-4 w-8 h-10 bg-blue-300 rounded border-2 border-blue-400 shadow-lg animate-pulse">
-                    <div className="absolute top-1 left-1 right-1 h-3 bg-blue-400 rounded shadow-inner"></div>
-                    <div className="absolute -right-6 top-1/2 transform -translate-y-1/2 bg-red-600 text-white px-1 py-0.5 rounded text-xs font-bold">
-                      PINCH
-                    </div>
-                  </div>
-                  
-                  {/* Breath visualization */}
-                  <div className="absolute -right-16 top-8 animate-pulse">
-                    <div className="text-5xl">💨</div>
-                    <div className="text-center text-blue-600 font-bold text-sm">1 SEC</div>
-                  </div>
+            {/* Dual Image Display for Breathing Steps */}
+            <div className="relative h-80 bg-white overflow-hidden flex">
+              {/* Airway Management */}
+              <div className="w-1/2 relative">
+                <img 
+                  src={cprAirway} 
+                  alt="Head tilt chin lift for airway opening" 
+                  className="w-full h-full object-contain"
+                />
+                <div className="absolute top-4 left-2 bg-blue-600 text-white px-2 py-1 rounded font-bold text-xs">
+                  🔄 TILT & LIFT
                 </div>
-                
-                {/* Step-by-step guide */}
-                <div className="absolute top-4 left-4 space-y-2">
-                  <div className="bg-white border-2 border-blue-500 rounded-lg p-2 shadow-lg">
-                    <div className="text-blue-600 font-bold text-sm">1️⃣ TILT HEAD BACK</div>
-                  </div>
-                  <div className="bg-white border-2 border-blue-500 rounded-lg p-2 shadow-lg">
-                    <div className="text-blue-600 font-bold text-sm">2️⃣ LIFT CHIN UP</div>
-                  </div>
-                  <div className="bg-white border-2 border-blue-500 rounded-lg p-2 shadow-lg">
-                    <div className="text-blue-600 font-bold text-sm">3️⃣ PINCH NOSE</div>
-                  </div>
-                  <div className="bg-white border-2 border-blue-500 rounded-lg p-2 shadow-lg">
-                    <div className="text-blue-600 font-bold text-sm">4️⃣ SEAL & BREATHE</div>
-                  </div>
+              </div>
+              
+              {/* Rescue Breathing */}
+              <div className="w-1/2 relative">
+                <img 
+                  src={cprRescueBreath} 
+                  alt="Person giving rescue breath during CPR" 
+                  className="w-full h-full object-contain"
+                />
+                <div className="absolute top-4 right-2 bg-red-600 text-white px-2 py-1 rounded font-bold text-xs">
+                  💨 2 BREATHS
                 </div>
-                
-                {/* Breath counter */}
-                <div className="absolute top-4 right-4 bg-blue-600 text-white rounded-2xl p-4 shadow-2xl border-4 border-blue-700">
-                  <div className="text-3xl font-black">2</div>
-                  <div className="text-sm font-bold">BREATHS</div>
-                </div>
-                
-                {/* Timing emphasis */}
-                <div className="absolute bottom-4 right-4 bg-yellow-500 text-black px-4 py-2 rounded-lg font-bold shadow-lg border-2 border-yellow-600 animate-pulse">
-                  ⏱️ 1 SECOND EACH
-                </div>
+              </div>
+              
+              {/* Central divider with instructions */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-yellow-500 text-black px-4 py-2 rounded-lg font-bold shadow-lg border-2 border-yellow-600">
+                ⏱️ 1 SEC EACH
+              </div>
+              
+              {/* Step indicators */}
+              <div className="absolute bottom-4 left-4 bg-white border-2 border-blue-500 rounded-lg p-2 shadow-lg">
+                <div className="text-blue-600 font-bold text-sm">1️⃣ OPEN AIRWAY</div>
+              </div>
+              
+              <div className="absolute bottom-4 right-4 bg-white border-2 border-blue-500 rounded-lg p-2 shadow-lg">
+                <div className="text-blue-600 font-bold text-sm">2️⃣ GIVE BREATHS</div>
               </div>
             </div>
             
