@@ -10,6 +10,7 @@ import cprHandPosition from '@/assets/cpr-hand-position-hq.png';
 import cprCompressions from '@/assets/cpr-compressions-hq.png';
 import cprAirway from '@/assets/cpr-airway-hq.png';
 import cprRescueBreath from '@/assets/cpr-rescue-breath-hq.png';
+import cprRescueBreathSimple from '@/assets/cpr-rescue-breath-simple.png';
 
 interface CPRGuideProps {
   onBack: () => void;
@@ -604,16 +605,16 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
                 </div>
               </div>
               
-              {/* Breathing Demonstration */}
-              <div className="w-1/2 relative">
-                <img 
-                  src={cprRescueBreath} 
-                  alt="Person giving rescue breath" 
-                  className="w-full h-full object-contain"
-                />
-                <div className="absolute top-4 right-2 bg-blue-600 text-white px-3 py-2 rounded-lg font-bold text-sm shadow-lg">
-                  BREATHS
-                </div>
+               {/* Breathing Demonstration */}
+               <div className="w-1/2 relative">
+                 <img 
+                   src={cprRescueBreathSimple} 
+                   alt="Simple rescue breathing diagram" 
+                   className="w-full h-full object-contain"
+                 />
+                 <div className="absolute top-4 right-2 bg-blue-600 text-white px-3 py-2 rounded-lg font-bold text-sm shadow-lg">
+                   BREATHS
+                 </div>
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-4 py-2 rounded-xl font-black text-lg shadow-lg">
                   2 BREATHS
                 </div>
