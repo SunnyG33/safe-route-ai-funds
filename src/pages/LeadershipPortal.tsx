@@ -27,7 +27,9 @@ import {
   Download,
   FileText,
   Search,
-  Filter
+  Filter,
+  Satellite,
+  TrendingUp
 } from "lucide-react";
 
 const LeadershipPortal = () => {
@@ -1001,20 +1003,629 @@ const LeadershipPortal = () => {
 
           {/* Placeholder for other tabs */}
           <TabsContent value="community">
-            <Card>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Elder Consultation System */}
+              <Card className="border-purple-200 bg-purple-50/50 dark:bg-purple-950/20 dark:border-purple-800">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Crown className="h-5 w-5 text-purple-600" />
+                    Elder Consultation System
+                    <Badge variant="secondary" className="ml-2">
+                      <Satellite className="mr-1 h-3 w-3" />
+                      Starlink Enhanced
+                    </Badge>
+                  </CardTitle>
+                  <CardDescription>Direct consultation with community elders via Starlink-powered communication</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {/* Elder Availability Status */}
+                  <div className="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30 p-4 rounded-lg">
+                    <h4 className="font-medium mb-3">Elder Availability Status</h4>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between p-3 bg-white dark:bg-gray-900 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                          <div>
+                            <div className="font-medium text-sm">Elder Mary Thompson</div>
+                            <div className="text-xs text-muted-foreground">Traditional Medicine & Protocols</div>
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <Badge className="bg-green-100 text-green-800">Available</Badge>
+                          <Button size="sm">Consult</Button>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between p-3 bg-white dark:bg-gray-900 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                          <div>
+                            <div className="font-medium text-sm">Elder Robert Clearwater</div>
+                            <div className="text-xs text-muted-foreground">Land Navigation & Weather</div>
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <Badge className="bg-green-100 text-green-800">Available</Badge>
+                          <Button size="sm">Consult</Button>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between p-3 bg-white dark:bg-gray-900 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                          <div>
+                            <div className="font-medium text-sm">Elder Sarah Windwalker</div>
+                            <div className="text-xs text-muted-foreground">Ceremonial & Cultural Protocols</div>
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <Badge className="bg-yellow-100 text-yellow-800">In Consultation</Badge>
+                          <Button size="sm" variant="outline">Join Queue</Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Emergency Consultation */}
+                  <div className="bg-red-50 dark:bg-red-950/20 p-4 rounded-lg border border-red-200 dark:border-red-800">
+                    <h4 className="font-medium mb-3 text-red-800 dark:text-red-200">Emergency Elder Consultation</h4>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      For urgent matters requiring immediate elder wisdom. Bypasses normal queue and activates priority Starlink channels.
+                    </p>
+                    <Button variant="destructive" className="w-full">
+                      <AlertTriangle className="mr-2 h-4 w-4" />
+                      Request Emergency Consultation
+                    </Button>
+                  </div>
+
+                  {/* Recent Consultations */}
+                  <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg">
+                    <h4 className="font-medium mb-3">Recent Consultations</h4>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Traditional burn protocols</span>
+                        <span className="font-medium">2 hours ago</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Water source validation</span>
+                        <span className="font-medium">5 hours ago</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Emergency evacuation routes</span>
+                        <span className="font-medium">1 day ago</span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Community Knowledge Sharing */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Users className="h-5 w-5 text-blue-600" />
+                    Community Knowledge Sharing
+                  </CardTitle>
+                  <CardDescription>Real-time knowledge sharing across all communities via Starlink network</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {/* Knowledge Sharing Metrics */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-blue-500/10 p-4 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <BookOpen className="h-4 w-4 text-blue-600" />
+                        <span className="text-sm font-medium">Active Shares</span>
+                      </div>
+                      <div className="text-2xl font-bold text-blue-600">127</div>
+                      <div className="text-xs text-muted-foreground">Past 24 hours</div>
+                    </div>
+                    <div className="bg-green-500/10 p-4 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Heart className="h-4 w-4 text-green-600" />
+                        <span className="text-sm font-medium">Communities</span>
+                      </div>
+                      <div className="text-2xl font-bold text-green-600">8</div>
+                      <div className="text-xs text-muted-foreground">All connected</div>
+                    </div>
+                  </div>
+
+                  {/* Live Knowledge Feed */}
+                  <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
+                    <h4 className="font-medium mb-3">Live Knowledge Feed</h4>
+                    <div className="space-y-3">
+                      <div className="p-3 border rounded bg-white dark:bg-gray-800">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="font-medium text-sm">Traditional Weather Indicators</span>
+                          <Badge variant="secondary" className="text-xs">3 min ago</Badge>
+                        </div>
+                        <p className="text-sm text-muted-foreground mb-2">
+                          "When the ravens gather near the old pine, heavy rains come within 6 hours." - Elder Mary T.
+                        </p>
+                        <div className="flex gap-2">
+                          <Badge variant="outline" className="text-xs">Weather</Badge>
+                          <Badge variant="outline" className="text-xs">Verified</Badge>
+                        </div>
+                      </div>
+
+                      <div className="p-3 border rounded bg-white dark:bg-gray-800">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="font-medium text-sm">Emergency Route Update</span>
+                          <Badge variant="secondary" className="text-xs">15 min ago</Badge>
+                        </div>
+                        <p className="text-sm text-muted-foreground mb-2">
+                          "Northern passage blocked by fallen tree. Use the old deer trail as alternative." - Community Ranger
+                        </p>
+                        <div className="flex gap-2">
+                          <Badge variant="outline" className="text-xs">Navigation</Badge>
+                          <Badge variant="outline" className="text-xs">Urgent</Badge>
+                        </div>
+                      </div>
+
+                      <div className="p-3 border rounded bg-white dark:bg-gray-800">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="font-medium text-sm">Medicinal Plant Harvest</span>
+                          <Badge variant="secondary" className="text-xs">1 hour ago</Badge>
+                        </div>
+                        <p className="text-sm text-muted-foreground mb-2">
+                          "Willow bark optimal for harvest this week. Location coordinates shared via secure channel." - Elder Robert C.
+                        </p>
+                        <div className="flex gap-2">
+                          <Badge variant="outline" className="text-xs">Medicine</Badge>
+                          <Badge variant="outline" className="text-xs">Seasonal</Badge>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Share Knowledge */}
+                  <div className="space-y-3">
+                    <Button className="w-full">
+                      <Upload className="mr-2 h-4 w-4" />
+                      Share Knowledge with All Communities
+                    </Button>
+                    <div className="grid grid-cols-2 gap-3">
+                      <Button variant="outline" className="w-full">
+                        <Search className="mr-2 h-4 w-4" />
+                        Search Archive
+                      </Button>
+                      <Button variant="outline" className="w-full">
+                        <Filter className="mr-2 h-4 w-4" />
+                        Filter by Type
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Elder Council Dashboard */}
+            <Card className="mt-6 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30">
               <CardHeader>
-                <CardTitle>Community Management</CardTitle>
-                <CardDescription>Coming soon - Member management and communication tools</CardDescription>
+                <CardTitle className="flex items-center gap-2">
+                  <Crown className="h-5 w-5 text-amber-600" />
+                  Elder Council Emergency Dashboard
+                </CardTitle>
+                <CardDescription>Unified elder council for emergency decision-making via Starlink coordination</CardDescription>
               </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* Council Status */}
+                  <div className="space-y-4">
+                    <h4 className="font-medium">Elder Council Status</h4>
+                    <div className="space-y-3">
+                      <div className="p-3 border rounded-lg bg-white dark:bg-gray-900">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="font-medium text-sm">Emergency Assembly</span>
+                          <Badge className="bg-green-100 text-green-800">Ready</Badge>
+                        </div>
+                        <div className="text-xs text-muted-foreground space-y-1">
+                          <div>7 of 8 Elders Available</div>
+                          <div>Starlink Channels: Open</div>
+                          <div>Response Time: &lt; 5 minutes</div>
+                        </div>
+                      </div>
+                      
+                      <div className="p-3 border rounded-lg bg-amber-50 dark:bg-amber-950/20">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="font-medium text-sm">Traditional Protocol Review</span>
+                          <Badge className="bg-amber-100 text-amber-800">In Session</Badge>
+                        </div>
+                        <div className="text-xs text-muted-foreground space-y-1">
+                          <div>Topic: Evacuation Ceremonies</div>
+                          <div>Participants: 4 Elders</div>
+                          <div>Duration: 25 minutes</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Recent Decisions */}
+                  <div className="space-y-4">
+                    <h4 className="font-medium">Recent Council Decisions</h4>
+                    <div className="space-y-3">
+                      <div className="p-3 border rounded-lg bg-white dark:bg-gray-900">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="font-medium text-sm">Sacred Site Emergency Access</span>
+                          <span className="text-xs text-muted-foreground">2 hours ago</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          Approved temporary emergency vehicle access to western sacred grounds during wildfire response.
+                        </p>
+                        <Badge variant="outline" className="text-xs mt-2">Approved</Badge>
+                      </div>
+
+                      <div className="p-3 border rounded-lg bg-white dark:bg-gray-900">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="font-medium text-sm">Traditional Medicine Protocol</span>
+                          <span className="text-xs text-muted-foreground">1 day ago</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          Updated integration of traditional remedies with modern medical emergency response.
+                        </p>
+                        <Badge variant="outline" className="text-xs mt-2">Implemented</Badge>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Council Actions */}
+                  <div className="space-y-4">
+                    <h4 className="font-medium">Council Actions</h4>
+                    <div className="space-y-3">
+                      <Button variant="destructive" className="w-full">
+                        <AlertTriangle className="mr-2 h-4 w-4" />
+                        Convene Emergency Council
+                      </Button>
+                      <Button className="w-full">
+                        <Radio className="mr-2 h-4 w-4" />
+                        Open Elder Channel
+                      </Button>
+                      <Button variant="outline" className="w-full">
+                        <BookOpen className="mr-2 h-4 w-4" />
+                        Review Protocols
+                      </Button>
+                      <Button variant="outline" className="w-full">
+                        <Satellite className="mr-2 h-4 w-4" />
+                        Starlink Council Bridge
+                      </Button>
+                      
+                      <div className="p-3 border rounded-lg bg-blue-50 dark:bg-blue-950/20 mt-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                          <span className="text-sm font-medium">Live Council Feed</span>
+                        </div>
+                        <div className="text-xs text-muted-foreground space-y-1">
+                          <div>Elder Mary T. joined council chamber</div>
+                          <div>Traditional protocol review started</div>
+                          <div>Starlink backup channels verified</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
             </Card>
           </TabsContent>
 
           <TabsContent value="responses">
-            <Card>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Emergency Response Status */}
+              <Card className="border-red-200 bg-red-50/50 dark:bg-red-950/20 dark:border-red-800">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Shield className="h-5 w-5 text-red-600" />
+                    Active Emergency Response
+                    <Badge variant="destructive" className="ml-2">
+                      <Satellite className="mr-1 h-3 w-3" />
+                      Starlink Connected
+                    </Badge>
+                  </CardTitle>
+                  <CardDescription>Real-time emergency coordination with Starlink-powered connectivity</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {/* Emergency Metrics */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-red-500/10 p-4 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <AlertTriangle className="h-4 w-4 text-red-600" />
+                        <span className="text-sm font-medium">Active Alerts</span>
+                      </div>
+                      <div className="text-2xl font-bold text-red-600">3</div>
+                      <div className="text-xs text-muted-foreground">2 Weather, 1 Medical</div>
+                    </div>
+                    <div className="bg-green-500/10 p-4 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Users className="h-4 w-4 text-green-600" />
+                        <span className="text-sm font-medium">Response Teams</span>
+                      </div>
+                      <div className="text-2xl font-bold text-green-600">12</div>
+                      <div className="text-xs text-muted-foreground">8 Active, 4 Standby</div>
+                    </div>
+                  </div>
+
+                  {/* Starlink Connectivity Status */}
+                  <div className="bg-blue-500/10 p-4 rounded-lg">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <Satellite className="h-4 w-4 text-blue-600" />
+                        <span className="text-sm font-medium">Starlink Network Status</span>
+                      </div>
+                      <Badge variant="secondary" className="bg-green-100 text-green-800">Online</Badge>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 text-xs">
+                      <div>
+                        <div className="text-muted-foreground">Latency</div>
+                        <div className="font-medium">23ms</div>
+                      </div>
+                      <div>
+                        <div className="text-muted-foreground">Speed</div>
+                        <div className="font-medium">185 Mbps</div>
+                      </div>
+                      <div>
+                        <div className="text-muted-foreground">Coverage</div>
+                        <div className="font-medium">98%</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Emergency Actions */}
+                  <div className="space-y-3">
+                    <Button variant="destructive" className="w-full">
+                      <AlertTriangle className="mr-2 h-4 w-4" />
+                      Declare Emergency
+                    </Button>
+                    <div className="grid grid-cols-2 gap-3">
+                      <Button variant="outline" className="w-full">
+                        <Radio className="mr-2 h-4 w-4" />
+                        Coordinate Teams
+                      </Button>
+                      <Button variant="outline" className="w-full">
+                        <MapPin className="mr-2 h-4 w-4" />
+                        Track Resources
+                      </Button>
+                    </div>
+                    <Button className="w-full">
+                      <TrendingUp className="mr-2 h-4 w-4" />
+                      Emergency Analytics Dashboard
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Real-time Incident Tracking */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <AlertTriangle className="h-5 w-5 text-orange-600" />
+                    Live Incident Tracking
+                  </CardTitle>
+                  <CardDescription>Real-time emergency incidents across all communities</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="p-4 border-2 border-red-200 rounded-lg bg-red-50/50 dark:bg-red-950/20">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                        <span className="font-medium text-sm">CRITICAL: Wildfire Approaching</span>
+                      </div>
+                      <Badge variant="destructive">Active</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Northern Territory - Wind direction change detected. Evacuation protocols activated via Starlink alert system.
+                    </p>
+                    <div className="grid grid-cols-2 gap-2 text-xs mb-3">
+                      <div>
+                        <span className="text-muted-foreground">Distance:</span> 
+                        <span className="font-medium ml-1">2.3km</span>
+                      </div>
+                      <div>
+                        <span className="text-muted-foreground">Response Time:</span>
+                        <span className="font-medium ml-1">12 min</span>
+                      </div>
+                      <div>
+                        <span className="text-muted-foreground">People Affected:</span>
+                        <span className="font-medium ml-1">47</span>
+                      </div>
+                      <div>
+                        <span className="text-muted-foreground">Teams Deployed:</span>
+                        <span className="font-medium ml-1">3</span>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button size="sm" variant="destructive">Emergency Override</Button>
+                      <Button size="sm" variant="outline">View Details</Button>
+                    </div>
+                  </div>
+
+                  <div className="p-4 border rounded-lg bg-yellow-50/50 dark:bg-yellow-950/20">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <span className="font-medium text-sm">Medical Emergency</span>
+                      </div>
+                      <Badge variant="secondary">Responding</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Sunset Ridge Community - Elder requiring immediate medical attention. Cultural protocol team en route.
+                    </p>
+                    <div className="grid grid-cols-2 gap-2 text-xs mb-3">
+                      <div>
+                        <span className="text-muted-foreground">Priority:</span> 
+                        <span className="font-medium ml-1">High</span>
+                      </div>
+                      <div>
+                        <span className="text-muted-foreground">ETA:</span>
+                        <span className="font-medium ml-1">8 min</span>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button size="sm">Update Status</Button>
+                      <Button size="sm" variant="outline">Cultural Protocol Check</Button>
+                    </div>
+                  </div>
+
+                  <div className="p-4 border rounded-lg bg-blue-50/50 dark:bg-blue-950/20">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                        <span className="font-medium text-sm">Weather Alert</span>
+                      </div>
+                      <Badge variant="outline">Monitoring</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Severe storm system detected. Traditional weather indicators align with satellite data via Starlink.
+                    </p>
+                    <div className="grid grid-cols-2 gap-2 text-xs mb-3">
+                      <div>
+                        <span className="text-muted-foreground">Severity:</span> 
+                        <span className="font-medium ml-1">Moderate</span>
+                      </div>
+                      <div>
+                        <span className="text-muted-foreground">Affected Areas:</span>
+                        <span className="font-medium ml-1">3 Communities</span>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button size="sm" variant="outline">Traditional + Modern Forecast</Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Response Team Coordination */}
+            <Card className="mt-6">
               <CardHeader>
-                <CardTitle>Emergency Response Coordination</CardTitle>
-                <CardDescription>Coming soon - Real-time emergency response management</CardDescription>
+                <CardTitle className="flex items-center gap-2">
+                  <Users className="h-5 w-5 text-blue-600" />
+                  Response Team Coordination Dashboard
+                </CardTitle>
+                <CardDescription>Real-time team deployment and resource management via Starlink network</CardDescription>
               </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* Team Status */}
+                  <div className="space-y-4">
+                    <h4 className="font-medium">Active Response Teams</h4>
+                    <div className="space-y-3">
+                      <div className="p-3 border rounded-lg bg-green-50 dark:bg-green-950/20">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="font-medium text-sm">Cultural Protocol Team A</span>
+                          <Badge className="bg-green-100 text-green-800">Active</Badge>
+                        </div>
+                        <div className="text-xs text-muted-foreground space-y-1">
+                          <div>Elder Mary T. (Lead), Sarah W., Tom R.</div>
+                          <div>Location: Northern Territory Fire Zone</div>
+                          <div>Starlink Status: Connected</div>
+                        </div>
+                      </div>
+                      
+                      <div className="p-3 border rounded-lg bg-yellow-50 dark:bg-yellow-950/20">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="font-medium text-sm">Medical Response Team</span>
+                          <Badge className="bg-yellow-100 text-yellow-800">En Route</Badge>
+                        </div>
+                        <div className="text-xs text-muted-foreground space-y-1">
+                          <div>Dr. James L., Paramedic Lisa K.</div>
+                          <div>Destination: Sunset Ridge</div>
+                          <div>ETA: 8 minutes</div>
+                        </div>
+                      </div>
+
+                      <div className="p-3 border rounded-lg">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="font-medium text-sm">Evacuation Coordination</span>
+                          <Badge variant="outline">Standby</Badge>
+                        </div>
+                        <div className="text-xs text-muted-foreground space-y-1">
+                          <div>Team Lead: Robert C.</div>
+                          <div>Vehicles: 4 ready</div>
+                          <div>Capacity: 48 people</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Resource Allocation */}
+                  <div className="space-y-4">
+                    <h4 className="font-medium">Resource Allocation</h4>
+                    <div className="space-y-3">
+                      <div className="p-3 border rounded-lg">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="font-medium text-sm">Emergency Vehicles</span>
+                          <span className="text-sm">8/12 Available</span>
+                        </div>
+                        <div className="bg-muted rounded-full h-2 mb-2">
+                          <div className="bg-primary h-2 rounded-full" style={{ width: '67%' }}></div>
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          4 Deployed, 8 Available
+                        </div>
+                      </div>
+
+                      <div className="p-3 border rounded-lg">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="font-medium text-sm">Medical Supplies</span>
+                          <span className="text-sm">Good</span>
+                        </div>
+                        <div className="bg-muted rounded-full h-2 mb-2">
+                          <div className="bg-green-500 h-2 rounded-full" style={{ width: '85%' }}></div>
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          Stock levels optimal
+                        </div>
+                      </div>
+
+                      <div className="p-3 border rounded-lg">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="font-medium text-sm">Starlink Terminals</span>
+                          <span className="text-sm">12/15 Active</span>
+                        </div>
+                        <div className="bg-muted rounded-full h-2 mb-2">
+                          <div className="bg-blue-500 h-2 rounded-full" style={{ width: '80%' }}></div>
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          3 in emergency deployment
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Communication Hub */}
+                  <div className="space-y-4">
+                    <h4 className="font-medium">Communication Hub</h4>
+                    <div className="space-y-3">
+                      <Button className="w-full">
+                        <Radio className="mr-2 h-4 w-4" />
+                        Open Emergency Channel
+                      </Button>
+                      <Button variant="outline" className="w-full">
+                        <Satellite className="mr-2 h-4 w-4" />
+                        Starlink Direct Connect
+                      </Button>
+                      <Button variant="outline" className="w-full">
+                        <Users className="mr-2 h-4 w-4" />
+                        Elder Emergency Council
+                      </Button>
+                      <Button variant="outline" className="w-full">
+                        <AlertTriangle className="mr-2 h-4 w-4" />
+                        Broadcast Alert
+                      </Button>
+                      
+                      <div className="p-3 border rounded-lg bg-blue-50 dark:bg-blue-950/20 mt-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                          <span className="text-sm font-medium">Live Emergency Feed</span>
+                        </div>
+                        <div className="text-xs text-muted-foreground space-y-1">
+                          <div>15:24 - Team A reached evacuation point</div>
+                          <div>15:18 - Medical team ETA updated</div>
+                          <div>15:15 - Starlink backup activated</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
             </Card>
           </TabsContent>
 
