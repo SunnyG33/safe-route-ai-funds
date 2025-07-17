@@ -4,12 +4,12 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Mic, MicOff, Heart, Volume2, User, Hand, Smartphone, Eye, Stethoscope, Activity, Zap, Timer, ArrowRight, Phone, ChevronLeft, ChevronRight } from 'lucide-react';
 
-// Import CPR instruction images
-import cprCheckResponsiveness from '@/assets/cpr-check-responsiveness.png';
-import cprHandPosition from '@/assets/cpr-hand-position.png';
-import cprCompressions from '@/assets/cpr-compressions.png';
-import cprAirway from '@/assets/cpr-airway.png';
-import cprRescueBreath from '@/assets/cpr-rescue-breath.png';
+// Import high-quality CPR instruction images
+import cprCheckResponsiveness from '@/assets/cpr-check-responsiveness-hq.png';
+import cprHandPosition from '@/assets/cpr-hand-position-hq.png';
+import cprCompressions from '@/assets/cpr-compressions-hq.png';
+import cprAirway from '@/assets/cpr-airway-hq.png';
+import cprRescueBreath from '@/assets/cpr-rescue-breath-hq.png';
 
 interface CPRGuideProps {
   onBack: () => void;
