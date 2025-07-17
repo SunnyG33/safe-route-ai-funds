@@ -393,9 +393,9 @@ const CPRGuide: React.FC<CPRGuideProps> = ({ onBack }) => {
               
               {/* Compression Counter */}
               {isActive && (
-                <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 bg-red-700 text-white rounded-2xl shadow-2xl border-8 border-red-800 px-8 py-4 z-20">
-                  <div className="text-6xl font-black animate-pulse">{compressionCount}</div>
-                  <div className="text-xl font-bold">/ 30</div>
+                <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-red-700 text-white rounded-xl shadow-xl border-4 border-red-800 px-6 py-3 z-20">
+                  <div className="text-4xl font-black animate-pulse">{compressionCount}</div>
+                  <div className="text-lg font-bold">/ 30</div>
                 </div>
               )}
             </div>
