@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import EmergencyHero from "@/components/EmergencyHero";
 import EmergencyDashboard from "@/components/EmergencyDashboard";
@@ -23,6 +24,9 @@ const Index = () => {
           size="sm"
         >
           Dashboard
+        </Button>
+        <Button asChild variant="secondary" size="sm">
+          <Link to="/leadership">Leadership Portal</Link>
         </Button>
       </div>
 
