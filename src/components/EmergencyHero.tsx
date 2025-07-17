@@ -1,9 +1,17 @@
-import { Shield, Phone, CheckCircle, Users, AlertTriangle, MapPin } from "lucide-react";
+import { useState } from "react";
+import { Shield, Phone, CheckCircle, Users, AlertTriangle, MapPin, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import CPRGuide from "./emergency/CPRGuide";
 
 const EmergencyHero = () => {
+  const [showCPRGuide, setShowCPRGuide] = useState(false);
+
+  if (showCPRGuide) {
+    return <CPRGuide onBack={() => setShowCPRGuide(false)} />;
+  }
+
   // Emergency hero component with indigenous-first design
   return (
     <div className="min-h-screen bg-emergency-calm p-6">
@@ -70,6 +78,18 @@ const EmergencyHero = () => {
                 <div className="text-left">
                   <div className="font-semibold">Find Safe Route</div>
                   <div className="text-sm opacity-90">Get directions to safety</div>
+                </div>
+              </Button>
+              <Button 
+                onClick={() => setShowCPRGuide(true)}
+                variant="outline" 
+                size="lg" 
+                className="border-emergency-danger text-emergency-danger hover:bg-emergency-danger hover:text-emergency-danger-foreground justify-start h-16"
+              >
+                <Heart className="h-6 w-6 mr-3" />
+                <div className="text-left">
+                  <div className="font-semibold">CPR Guide</div>
+                  <div className="text-sm opacity-90">Voice-guided CPR assistance</div>
                 </div>
               </Button>
             </div>
