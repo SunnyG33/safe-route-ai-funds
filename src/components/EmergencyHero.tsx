@@ -21,7 +21,7 @@ const EmergencyHero = () => {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-emergency-safe rounded-full mb-4">
             <Shield className="h-8 w-8 text-emergency-safe-foreground" />
           </div>
-          <h1 className="text-3xl font-bold text-emergency-calm-foreground">SafeRoute AI</h1>
+          <h1 className="text-3xl font-bold text-emergency-calm-foreground">SafeRoute AI - Mobile CPR Ready</h1>
           <p className="text-lg text-emergency-calm-foreground/80">You're going to be okay. Let's take this step by step.</p>
         </div>
 
